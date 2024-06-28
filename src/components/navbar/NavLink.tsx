@@ -12,8 +12,8 @@ const NavLink: React.FC<TNavLink> = ({ href, name, isLoggedIn }) => {
 	return (
 		<Button
 			className={cn(
-				"text-slate-300 last:pr-0",
-				pathname == href && "text-slate-900 underline"
+				"text-slate-300 hover:no-underline last:pr-0",
+				pathname == href && "text-slate-900"
 			)}
 			asChild
 			variant="link"

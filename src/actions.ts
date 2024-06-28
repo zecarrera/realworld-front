@@ -1,10 +1,10 @@
 'use server'
 
 import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
 
 import { getIronSession } from "iron-session"
 
-import { redirect } from "next/navigation"
 import { ISessionData, defaultSession, sessionOptions } from "@/lib/config"
 
 export const getSession = async () => {

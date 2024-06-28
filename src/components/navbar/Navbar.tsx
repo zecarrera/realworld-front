@@ -1,9 +1,16 @@
 import Link from "next/link";
+import { Titillium_Web } from "next/font/google";
+
+import { Settings } from "lucide-react";
 
 import { getSession } from "@/actions";
 
 import NavLink from "@/components/navbar/NavLink";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const titilliumWeb = Titillium_Web({
+	weight: "700",
+	subsets: ["latin-ext"],
+});
 
 const NavBar = async () => {
 	const session = await getSession();
@@ -16,28 +23,43 @@ const NavBar = async () => {
 		},
 		{
 			href: "/login",
-			name: "Login",
+			name: "Sign in",
 			isLoggedIn: !session.isLoggedIn,
 		},
 		{
-			href: "/dashboard",
-			name: "Dashboard",
+			href: "/register",
+			name: "Sign up",
+			isLoggedIn: !session.isLoggedIn,
+		},
+		{
+			href: "/article",
+			name: "New Article",
 			isLoggedIn: session.isLoggedIn,
 		},
 		{
-			href: "/transaction",
+			href: "/settings",
+			name: "Settings",
+			isLoggedIn: !session.isLoggedIn,
+		},
+		{
+			href: "/editor",
 			name: "Transaction",
+			isLoggedIn: session.isLoggedIn,
+		},
+		{
+			href: "/profile",
+			name: "username",
 			isLoggedIn: session.isLoggedIn,
 		},
 	];
 
 	return (
-		<div className="flex justify-between min-w-full p-2 md:px-5 lg:px-8">
-			<Link href="/">
-				<Avatar>
-					<AvatarImage src="https://lh3.googleusercontent.com/a/ACg8ocJ7MBdV5cQ4zvbpTTy8B9wBR_HQ3gaPj28XA_6BBu2z2TLMso_T=s288-c-no" />
-					<AvatarFallback>Qubi</AvatarFallback>
-				</Avatar>
+		<div className="flex justify-between min-w-full py-2 px-4 md:px-10 lg:px-14">
+			<Link
+				className={`${titilliumWeb.className} text-green-custom text-2xl font-bold`}
+				href="/"
+			>
+				conduit
 			</Link>
 			<div className="flex  justify-end items-center">
 				{navLinks.map((link) => (
@@ -48,7 +70,6 @@ const NavBar = async () => {
 						name={link.name}
 					/>
 				))}
-				{session.isLoggedIn && <Profile userId={session!.userId!} />}
 			</div>
 		</div>
 	);
