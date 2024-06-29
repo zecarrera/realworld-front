@@ -1,16 +1,18 @@
 import Link from "next/link";
-import { Titillium_Web } from "next/font/google";
 
-import { Settings } from "lucide-react";
+import { Titillium_Web } from "next/font/google";
+import { Settings, FilePenLine } from "lucide-react";
+
+export const titilliumWeb = Titillium_Web({
+	weight: "700",
+	subsets: ["latin"],
+});
 
 import { getSession } from "@/actions";
 
 import NavLink from "@/components/navbar/NavLink";
-
-const titilliumWeb = Titillium_Web({
-	weight: "700",
-	subsets: ["latin-ext"],
-});
+import { TNavLink } from "@/components/navbar/interfaces/navlink";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const NavBar = async () => {
 	const session = await getSession();
@@ -34,12 +36,14 @@ const NavBar = async () => {
 		{
 			href: "/article",
 			name: "New Article",
+			icon: <FilePenLine className="m-auto" width={16} height={16} />,
 			isLoggedIn: session.isLoggedIn,
 		},
 		{
 			href: "/settings",
 			name: "Settings",
-			isLoggedIn: !session.isLoggedIn,
+			icon: <Settings className="m-auto" width={16} height={16} />,
+			isLoggedIn: session.isLoggedIn,
 		},
 		{
 			href: "/editor",
@@ -49,6 +53,15 @@ const NavBar = async () => {
 		{
 			href: "/profile",
 			name: "username",
+			icon: (
+				<Avatar>
+					<AvatarImage
+						src="https://github.com/shadcn.png"
+						alt="profile"
+					/>
+					<AvatarFallback>{session!.username!}</AvatarFallback>
+				</Avatar>
+			),
 			isLoggedIn: session.isLoggedIn,
 		},
 	];
@@ -68,6 +81,7 @@ const NavBar = async () => {
 						key={link.name}
 						href={link.href}
 						name={link.name}
+						icon={link.icon}
 					/>
 				))}
 			</div>

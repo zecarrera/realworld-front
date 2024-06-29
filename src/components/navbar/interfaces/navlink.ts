@@ -1,7 +1,9 @@
-type TNavLink =
+import { ReactElement } from "react";
+
+export type TNavLink =
     {
         href: string;
         name: string;
-        icon?: React.FC;
+        icon?: ReactElement;
         isLoggedIn: boolean;
     } 

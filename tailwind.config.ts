@@ -53,7 +53,10 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         green: {
-          custom: '#5cb85c !important'
+          custom: '#5cb85c'
+        },
+        black: {
+          custom: '#373a3c'
         }
 
       },
