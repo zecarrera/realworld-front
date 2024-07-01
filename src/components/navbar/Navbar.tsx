@@ -1,18 +1,14 @@
 import Link from "next/link";
 
-import { Titillium_Web } from "next/font/google";
 import { Settings, FilePenLine } from "lucide-react";
 
-export const titilliumWeb = Titillium_Web({
-	weight: "700",
-	subsets: ["latin"],
-});
 
 import { getSession } from "@/actions";
 
 import NavLink from "@/components/navbar/NavLink";
 import { TNavLink } from "@/components/navbar/interfaces/navlink";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { titilliumWeb } from "@/lib/font-loader";
 
 const NavBar = async () => {
 	const session = await getSession();

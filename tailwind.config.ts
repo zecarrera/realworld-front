@@ -60,6 +60,9 @@ const config = {
         }
 
       },
+      boxShadow: {
+        custom: 'inset 0 8px 8px - 8px rgba(0, 0, 0, .3), inset 0 -8px 8px - 8px rgba(0, 0, 0, .3)',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
