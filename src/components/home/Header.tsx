@@ -9,7 +9,7 @@ export const Header = () => {
 				Conduit
 			</h1>
 			<p
-				className={`${sourceSansProExtraLight} mx-auto w-fit h-fit text-2xl font-thin`}
+				className={`${sourceSansProExtraLight.className} mx-auto w-fit h-fit text-2xl font-thin`}
 			>
 				A place to share nextjs knowledge
 			</p>
