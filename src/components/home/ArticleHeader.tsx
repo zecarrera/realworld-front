@@ -1,3 +1,5 @@
 export const ArticleHeader = () => {
-	return <div>Article header</div>;
+	return <div>
+		ArticleHeader
+	</div>;
 };

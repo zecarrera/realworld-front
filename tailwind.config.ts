@@ -57,6 +57,9 @@ const config = {
         },
         black: {
           custom: '#373a3c'
+        },
+        blue: {
+          custom: '#66afe9'
         }
 
       },
