@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import { sourceSansPro } from "@/lib/font-loader";
+import { ToasterProvider } from "@/providers/toast-providers";
 
 export const metadata: Metadata = {
 	title: {
@@ -22,6 +23,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
+				<ToasterProvider />
 				<div
 					className={`${sourceSansPro.className} text-[1rem] text-black-custom leading-6 bg-white min-h-screen flex flex-col gap-2`}
 				>

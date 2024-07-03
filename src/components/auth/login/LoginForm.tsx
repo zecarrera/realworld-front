@@ -1,25 +1,37 @@
 "use client";
 
+import { useState } from "react";
+
 import { z } from "zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
 	Form,
 	FormItem,
-	FormLabel,
 	FormField,
 	FormControl,
 	FormMessage,
 } from "@/components/ui/form";
+import { TState } from "@/components/auth/interfaces/state";
+import { FormattedErrors } from "@/components/error/FormattedErrors";
+import { TError } from "@/app/api/(auth)/login/interfaces/error";
 
 const formSchema = z.object({
 	email: z.string().email(),
-	password: z.string(),
+	password: z.string().min(1),
 });
 
 export const LoginForm = () => {
+	const [state, setState] = useState<TState>({
+		loading: false,
+		isError: false,
+		errors: {},
+	});
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -28,16 +40,48 @@ export const LoginForm = () => {
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values);
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		setState((prevState) => ({ ...prevState, loading: true }));
+		await axios
+			.post("/api/login", values)
+			.then(async (res) => {
+				const result = await res.data;
+
+				if (result.status === 200) {
+					setState((prevState) => ({ ...prevState, loading: false }));
+				} else {
+					setState((_prevState) => ({
+						loading: false,
+						isError: true,
+						errors: result.data,
+					}));
+				}
+			})
+			.catch((err) => {
+				console.log("From LoginForm", err);
+				const errors: TError = {
+					"": [err.response.statusText],
+				};
+
+				setState((prevState) => ({
+					...prevState,
+					loading: false,
+					isError: true,
+					errors,
+				}));
+			});
 	}
 
 	return (
 		<Form {...form}>
+			{state.isError && (
+				<FormattedErrors data={state.errors} className="ml-5" />
+			)}
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 				<FormField
 					control={form.control}
 					name="email"
+					disabled={state.loading}
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
@@ -54,6 +98,7 @@ export const LoginForm = () => {
 				<FormField
 					control={form.control}
 					name="password"
+					disabled={state.loading}
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
@@ -61,7 +106,7 @@ export const LoginForm = () => {
 									type="password"
 									placeholder="Password"
 									{...field}
-									className="py-3 px-6 text-xl rounded-s-md text-gray-300 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
+									className="py-3 px-6 text-xl rounded-s-md text-gray-400 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -71,7 +116,8 @@ export const LoginForm = () => {
 				<div className="flex justify-end">
 					<Button
 						type="submit"
-						className="bg-green-custom opacity-65 py-3 px-5 rounded-md  text-xl"
+						disabled={state.loading}
+						className="bg-green-custom opacity-65 py-3 px-5 rounded-md  text-xl hover:bg-green-custom hover:opacity-100"
 					>
 						Sign in
 					</Button>
