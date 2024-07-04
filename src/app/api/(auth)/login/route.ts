@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 
 import axios from "axios";
 
+import { getSession } from "@/actions";
+
 export async function POST(req: Request) {
 	try {
 
@@ -16,7 +18,7 @@ export async function POST(req: Request) {
 				status: 400,
 			});
 
-		await axios
+		const res = await axios
 			.post(`${process.env.BASE_URL}/users/login`, {
 				user: {
 					email: body.email,
@@ -24,9 +26,21 @@ export async function POST(req: Request) {
 				},
 			})
 
+		const data = await res.data
+		const session = await getSession();
+
+		session.isLoggedIn = true;
+		session.email = data.user.email;
+		session.username = data.user.username;
+		await session.save();
+
+		return NextResponse.json({ data: await res.data, status: res.status })
+
 	} catch (error: any) {
-		// console.error('API_LOGIN_POST', error.response.data.errors)
+		//console.error('API_LOGIN_POST', error)
 		if (error.response.status === 403)
+			return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
+		if (error.response.status === 422)
 			return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
 		return new NextResponse('Error', { status: 500, statusText: 'Internal server error' })
 	}

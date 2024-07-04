@@ -44,16 +44,15 @@ export const LoginForm = () => {
 		setState((prevState) => ({ ...prevState, loading: true }));
 		await axios
 			.post("/api/login", values)
-			.then(async (res) => {
-				const result = await res.data;
-
-				if (result.status === 200) {
+			.then((res) => {
+				if (res.status === 200) {
 					setState((prevState) => ({ ...prevState, loading: false }));
+					window.location.assign("/");
 				} else {
 					setState((_prevState) => ({
 						loading: false,
 						isError: true,
-						errors: result.data,
+						errors: res.data,
 					}));
 				}
 			})
