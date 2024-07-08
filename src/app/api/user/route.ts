@@ -6,21 +6,24 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
 
-        if (!body.username)
-            return new NextResponse("Property username is required", {
+        if (!body.token) {
+            return new NextResponse("Property token is required", {
                 status: 400
             });
+        }
 
         const res = await axios
-            .get(`${process.env.BASE_URL}/profiles/${body.username}`, {
+            .get(`${process.env.BASE_URL}/user`, {
                 headers: {
-                    'Authorization': JSON.stringify(`Token ${body.token}`)
+                    'Authorization': `Token ${body.token}`
                 }
             })
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        console.error('API_PROFILE_GET', error)
+        // console.error('API_USER_GET', error)
+        if (error.response.status === 401)
+            return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
         if (error.response.status === 403)
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
         if (error.response.status === 422)

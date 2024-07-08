@@ -62,7 +62,7 @@ export const SettingForm: React.FC<TSettingFormProps> = ({
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setState((prevState) => ({ ...prevState, loading: true }));
 		await axios
-			.post("/api/login", values)
+			.post("/api/profile", values)
 			.then((res) => {
 				if (res.status === 200) {
 					setState((prevState) => ({ ...prevState, loading: false }));
