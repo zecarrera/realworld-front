@@ -1,8 +1,8 @@
 import { SessionOptions } from "iron-session";
 
-import { IProfile } from "@/components/auth/interfaces/profile";
+import { ISession } from "@/components/auth/interfaces/session";
 
-export interface ISessionData extends Partial<IProfile> {
+export interface ISessionData extends Partial<ISession> {
     isLoggedIn: boolean;
 }
 

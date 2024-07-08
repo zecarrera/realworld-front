@@ -2,13 +2,12 @@ import Link from "next/link";
 
 import { Settings, FilePenLine } from "lucide-react";
 
-
 import { getSession } from "@/actions";
 
+import { titilliumWeb } from "@/lib/font-loader";
 import NavLink from "@/components/navbar/NavLink";
 import { TNavLink } from "@/components/navbar/interfaces/navlink";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { titilliumWeb } from "@/lib/font-loader";
 
 const NavBar = async () => {
 	const session = await getSession();
@@ -30,7 +29,7 @@ const NavBar = async () => {
 			isLoggedIn: !session.isLoggedIn,
 		},
 		{
-			href: "/article",
+			href: "/editor",
 			name: "New Article",
 			icon: <FilePenLine className="m-auto" width={16} height={16} />,
 			isLoggedIn: session.isLoggedIn,
@@ -42,16 +41,12 @@ const NavBar = async () => {
 			isLoggedIn: session.isLoggedIn,
 		},
 		{
-			href: "/editor",
-			name: "Transaction",
-			isLoggedIn: session.isLoggedIn,
-		},
-		{
 			href: "/profile",
-			name: "username",
+			name: session.username as string,
 			icon: (
 				<Avatar>
 					<AvatarImage
+						//TODO: actual image
 						src="https://github.com/shadcn.png"
 						alt="profile"
 					/>
@@ -63,14 +58,14 @@ const NavBar = async () => {
 	];
 
 	return (
-		<div className="flex justify-between min-w-full py-2 px-4 md:px-10 lg:px-14">
+		<div className="flex flex-col md:flex-row justify-between  min-w-full py-2 px-4 md:px-10 lg:px-14">
 			<Link
 				className={`${titilliumWeb.className} text-green-custom text-2xl font-bold`}
 				href="/"
 			>
 				conduit
 			</Link>
-			<div className="flex  justify-end items-center">
+			<div className="flex justify-end items-center gap-2">
 				{navLinks.map((link) => (
 					<NavLink
 						isLoggedIn={link.isLoggedIn}

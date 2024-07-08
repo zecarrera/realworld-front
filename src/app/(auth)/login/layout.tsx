@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 		"Conduit is realworld social blogging site. it uses a custom API for all requests, including authentication. login page of conduit",
 };
 
-export default function RootLayout({
+export default function LoginLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;

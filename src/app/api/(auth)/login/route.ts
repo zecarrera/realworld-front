@@ -32,6 +32,7 @@ export async function POST(req: Request) {
 		session.isLoggedIn = true;
 		session.email = data.user.email;
 		session.username = data.user.username;
+		session.token = data.user.token;
 		await session.save();
 
 		return NextResponse.json({ data: await res.data, status: res.status })

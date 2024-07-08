@@ -18,8 +18,8 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { TState } from "@/components/auth/interfaces/state";
-import { FormattedErrors } from "@/components/error/FormattedErrors";
 import { TError } from "@/app/api/(auth)/login/interfaces/error";
+import { FormattedErrors } from "@/components/error/FormattedErrors";
 
 const formSchema = z.object({
 	email: z.string().email(),
