@@ -45,14 +45,14 @@ export const LoginForm = () => {
 		await axios
 			.post("/api/login", values)
 			.then((res) => {
-				if (res.status === 200) {
+				if (res.data.status === 200) {
 					setState((prevState) => ({ ...prevState, loading: false }));
 					window.location.assign("/");
 				} else {
 					setState((_prevState) => ({
 						loading: false,
 						isError: true,
-						errors: res.data,
+						errors: res.data.data,
 					}));
 				}
 			})
@@ -72,56 +72,62 @@ export const LoginForm = () => {
 	}
 
 	return (
-		<Form {...form}>
+		<>
 			{state.isError && (
 				<FormattedErrors data={state.errors} className="ml-5" />
 			)}
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-				<FormField
-					control={form.control}
-					name="email"
-					disabled={state.loading}
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									placeholder="Email"
-									{...field}
-									className="py-3 px-6 text-xl rounded-s-md text-gray-400 placeholder:text-gray-400  focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name="password"
-					disabled={state.loading}
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									type="password"
-									placeholder="Password"
-									{...field}
-									className="py-3 px-6 text-xl rounded-s-md text-gray-400 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<div className="flex justify-end">
-					<Button
-						type="submit"
+
+			<Form {...form}>
+				<form
+					onSubmit={form.handleSubmit(onSubmit)}
+					className="space-y-8"
+				>
+					<FormField
+						control={form.control}
+						name="email"
 						disabled={state.loading}
-						className="bg-green-custom opacity-65 py-3 px-5 rounded-md  text-xl hover:bg-green-custom hover:opacity-100"
-					>
-						Sign in
-					</Button>
-				</div>
-			</form>
-		</Form>
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<Input
+										placeholder="Email"
+										{...field}
+										className="py-3 px-6 text-xl rounded-s-md text-gray-400 placeholder:text-gray-400  focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="password"
+						disabled={state.loading}
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<Input
+										type="password"
+										placeholder="Password"
+										{...field}
+										className="py-3 px-6 text-xl rounded-s-md text-gray-400 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<div className="flex justify-end">
+						<Button
+							type="submit"
+							disabled={state.loading}
+							className="bg-green-custom opacity-65 py-3 px-5 rounded-md  text-xl hover:bg-green-custom hover:opacity-100"
+						>
+							Sign in
+						</Button>
+					</div>
+				</form>
+			</Form>
+		</>
 	);
 };

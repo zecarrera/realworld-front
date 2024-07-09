@@ -14,9 +14,9 @@ export const FormattedErrors: React.FC<TFormattedErrors> = ({
 	const keys = Object.keys(data);
 	return (
 		<ul className={cn("list-disc text-left text-rose-700", className)}>
-			{keys.map((key) =>
-				data[key].map((error) => (
-					<li key={error}>{key + " " + error}</li>
+			{keys.map((ele) =>
+				data[ele].map((error, index) => (
+					<li key={index}>{ele + " " + error}</li>
 				))
 			)}
 		</ul>

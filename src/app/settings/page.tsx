@@ -23,6 +23,7 @@ const SettingsPage = async () => {
 					email={user.email}
 					imageUrl={user.image}
 					username={user.username}
+					token={session.token as string}
 				/>
 				<Separator />
 				<Logout />

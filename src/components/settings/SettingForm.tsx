@@ -25,7 +25,7 @@ import { FormattedErrors } from "@/components/error/FormattedErrors";
 const formSchema = z.object({
 	imageUrl: z.string().min(5).optional(),
 	username: z.string().min(2).optional(),
-	password: z.string().min(1).optional(),
+	password: z.string().optional(),
 	email: z.string().email().optional(),
 	bio: z.string().optional(),
 });
@@ -35,13 +35,15 @@ export type TSettingFormProps = {
 	username: string;
 	bio: string;
 	email: string;
+	token: string;
 };
 
 export const SettingForm: React.FC<TSettingFormProps> = ({
-	imageUrl,
-	username,
 	bio,
 	email,
+	token,
+	imageUrl,
+	username,
 }) => {
 	const [state, setState] = useState<TState>({
 		loading: false,
@@ -51,27 +53,33 @@ export const SettingForm: React.FC<TSettingFormProps> = ({
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			imageUrl: "",
-			username: "",
+			imageUrl,
+			username,
+			email,
+			bio,
 			password: "",
-			email: "",
-			bio: "",
 		},
 	});
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setState((prevState) => ({ ...prevState, loading: true }));
 		await axios
-			.post("/api/profile", values)
-			.then((res) => {
-				if (res.status === 200) {
+			.put("/api/user", {
+				...values,
+				token,
+			})
+			.then(async (res) => {
+				if (res.data.status === 200) {
 					setState((prevState) => ({ ...prevState, loading: false }));
-					window.location.assign("/");
+					const data = await res.data;
+					window.location.assign(
+						`/profile/${data.data.user.username}`
+					);
 				} else {
 					setState((_prevState) => ({
 						loading: false,
 						isError: true,
-						errors: res.data,
+						errors: res.data.data,
 					}));
 				}
 			})
@@ -104,9 +112,8 @@ export const SettingForm: React.FC<TSettingFormProps> = ({
 						<FormItem>
 							<FormControl>
 								<Input
-									placeholder="Image Url"
+									placeholder="image url"
 									{...field}
-									value={`data=${imageUrl}`}
 									className="py-3 px-6 text-xl rounded-s-md text-gray-500 placeholder:text-gray-500  focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
 								/>
 							</FormControl>
@@ -124,7 +131,6 @@ export const SettingForm: React.FC<TSettingFormProps> = ({
 								<Input
 									placeholder="username"
 									{...field}
-									value={username}
 									className="py-3 px-6 text-xl rounded-s-md text-gray-500 placeholder:text-gray-500  focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
 								/>
 							</FormControl>
@@ -142,7 +148,6 @@ export const SettingForm: React.FC<TSettingFormProps> = ({
 								<Textarea
 									placeholder="bio"
 									{...field}
-									value={bio}
 									className="py-3 px-6 text-xl rounded-s-md text-gray-500 placeholder:text-gray-500  focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
 								/>
 							</FormControl>
@@ -158,9 +163,8 @@ export const SettingForm: React.FC<TSettingFormProps> = ({
 						<FormItem>
 							<FormControl>
 								<Input
-									placeholder="email"
+									placeholder="email address"
 									{...field}
-									value={email}
 									className="py-3 px-6 text-xl rounded-s-md text-gray-500 placeholder:text-gray-500  focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
 								/>
 							</FormControl>
