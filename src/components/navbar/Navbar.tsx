@@ -8,76 +8,90 @@ import { titilliumWeb } from "@/lib/font-loader";
 import NavLink from "@/components/navbar/NavLink";
 import { TNavLink } from "@/components/navbar/interfaces/navlink";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import axios from "axios";
 
 const NavBar = async () => {
 	const session = await getSession();
 
-	const navLinks: TNavLink[] = [
-		{
-			href: "/",
-			name: "Home",
-			isLoggedIn: true,
-		},
-		{
-			href: "/login",
-			name: "Sign in",
-			isLoggedIn: !session.isLoggedIn,
-		},
-		{
-			href: "/register",
-			name: "Sign up",
-			isLoggedIn: !session.isLoggedIn,
-		},
-		{
-			href: "/editor",
-			name: "New Article",
-			icon: <FilePenLine className="m-auto" width={16} height={16} />,
-			isLoggedIn: session.isLoggedIn,
-		},
-		{
-			href: "/settings",
-			name: "Settings",
-			icon: <Settings className="m-auto" width={16} height={16} />,
-			isLoggedIn: session.isLoggedIn,
-		},
-		{
-			href: "/profile",
-			name: session.username as string,
-			icon: (
-				<Avatar>
-					<AvatarImage
-						//TODO: actual image
-						src="https://github.com/shadcn.png"
-						alt="profile"
-					/>
-					<AvatarFallback>{session!.username!}</AvatarFallback>
-				</Avatar>
-			),
-			isLoggedIn: session.isLoggedIn,
-		},
-	];
+	try {
+		const res = await axios.post("http://localhost:4000/api/user", {
+			token: session.token,
+		});
+		const data = await res.data;
 
-	return (
-		<div className="flex flex-col md:flex-row justify-between  min-w-full py-2 px-4 md:px-10 lg:px-14">
-			<Link
-				className={`${titilliumWeb.className} text-green-custom text-2xl font-bold`}
-				href="/"
-			>
-				conduit
-			</Link>
-			<div className="flex justify-end items-center gap-2">
-				{navLinks.map((link) => (
-					<NavLink
-						isLoggedIn={link.isLoggedIn}
-						key={link.name}
-						href={link.href}
-						name={link.name}
-						icon={link.icon}
-					/>
-				))}
+		const { user } = await data.data;
+		const navLinks: TNavLink[] = [
+			{
+				href: "/",
+				name: "Home",
+				isLoggedIn: true,
+			},
+			{
+				href: "/login",
+				name: "Sign in",
+				isLoggedIn: !session.isLoggedIn,
+			},
+			{
+				href: "/register",
+				name: "Sign up",
+				isLoggedIn: !session.isLoggedIn,
+			},
+			{
+				href: "/editor",
+				name: "New Article",
+				icon: <FilePenLine className="m-auto" width={16} height={16} />,
+				isLoggedIn: session.isLoggedIn,
+			},
+			{
+				href: "/settings",
+				name: "Settings",
+				icon: <Settings className="m-auto" width={16} height={16} />,
+				isLoggedIn: session.isLoggedIn,
+			},
+			{
+				href: "/profile",
+				name: session.username as string,
+				icon: (
+					<Avatar>
+						<AvatarImage
+							//TODO: actual image
+							src={user.image}
+							alt="profile"
+						/>
+						<AvatarFallback>{session!.username!}</AvatarFallback>
+					</Avatar>
+				),
+				isLoggedIn: session.isLoggedIn,
+			},
+		];
+		return (
+			<div className="flex flex-col md:flex-row justify-between  min-w-full py-2 px-4 md:px-10 lg:px-14">
+				<Link
+					className={`${titilliumWeb.className} text-green-custom text-2xl font-bold`}
+					href="/"
+				>
+					conduit
+				</Link>
+				<div className="flex justify-end items-center gap-2">
+					{navLinks.map((link) => (
+						<NavLink
+							isLoggedIn={link.isLoggedIn}
+							key={link.name}
+							href={link.href}
+							name={link.name}
+							icon={link.icon}
+						/>
+					))}
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} catch (err) {
+		return (
+			<h1 className="text-rose-500 w-fit mx-auto">
+				Internal server Error
+			</h1>
+		);
+	}
 };
 
 export default NavBar;
