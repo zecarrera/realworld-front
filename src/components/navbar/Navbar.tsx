@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import axios from "axios";
 import { Settings, FilePenLine } from "lucide-react";
 
 import { getSession } from "@/actions";
@@ -8,7 +9,6 @@ import { titilliumWeb } from "@/lib/font-loader";
 import NavLink from "@/components/navbar/NavLink";
 import { TNavLink } from "@/components/navbar/interfaces/navlink";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import axios from "axios";
 
 const NavBar = async () => {
 	const session = await getSession();
@@ -49,7 +49,7 @@ const NavBar = async () => {
 				isLoggedIn: session.isLoggedIn,
 			},
 			{
-				href: "/profile",
+				href: `/profile/${user.username}`,
 				name: session.username as string,
 				icon: (
 					<Avatar>

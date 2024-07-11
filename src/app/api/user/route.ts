@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        // console.error('API_USER_GET', error)
+        //console.error('API_USER_POST', error)
         if (error.response.status === 401)
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
         if (error.response.status === 403)
