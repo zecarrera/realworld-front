@@ -12,43 +12,45 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const NavBar = async () => {
 	const session = await getSession();
+	const navLinks: TNavLink[] = [
+		{
+			href: "/",
+			name: "Home",
+			isLoggedIn: true,
+		},
+		{
+			href: "/login",
+			name: "Sign in",
+			isLoggedIn: !session.isLoggedIn,
+		},
+		{
+			href: "/register",
+			name: "Sign up",
+			isLoggedIn: !session.isLoggedIn,
+		},
+		{
+			href: "/editor",
+			name: "New Article",
+			icon: <FilePenLine className="m-auto" width={16} height={16} />,
+			isLoggedIn: session.isLoggedIn,
+		},
+		{
+			href: "/settings",
+			name: "Settings",
+			icon: <Settings className="m-auto" width={16} height={16} />,
+			isLoggedIn: session.isLoggedIn,
+		},
+	];
 
 	try {
-		const res = await axios.post("http://localhost:4000/api/user", {
-			token: session.token,
-		});
-		const data = await res.data;
+		if (session.isLoggedIn) {
+			const res = await axios.post("http://localhost:4000/api/user", {
+				token: session.token ? session.token : "",
+			});
+			const data = await res.data;
 
-		const { user } = await data.data;
-		const navLinks: TNavLink[] = [
-			{
-				href: "/",
-				name: "Home",
-				isLoggedIn: true,
-			},
-			{
-				href: "/login",
-				name: "Sign in",
-				isLoggedIn: !session.isLoggedIn,
-			},
-			{
-				href: "/register",
-				name: "Sign up",
-				isLoggedIn: !session.isLoggedIn,
-			},
-			{
-				href: "/editor",
-				name: "New Article",
-				icon: <FilePenLine className="m-auto" width={16} height={16} />,
-				isLoggedIn: session.isLoggedIn,
-			},
-			{
-				href: "/settings",
-				name: "Settings",
-				icon: <Settings className="m-auto" width={16} height={16} />,
-				isLoggedIn: session.isLoggedIn,
-			},
-			{
+			const { user } = await data.data;
+			navLinks.push({
 				href: `/profile/${user.username}`,
 				name: session.username as string,
 				icon: (
@@ -62,8 +64,8 @@ const NavBar = async () => {
 					</Avatar>
 				),
 				isLoggedIn: session.isLoggedIn,
-			},
-		];
+			});
+		}
 		return (
 			<div className="flex flex-col md:flex-row justify-between  min-w-full py-2 px-4 md:px-10 lg:px-14">
 				<Link
