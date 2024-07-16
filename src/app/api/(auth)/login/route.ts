@@ -39,10 +39,12 @@ export async function POST(req: Request) {
 
 	} catch (error: any) {
 		//console.error('API_LOGIN_POST', error)
-		if (error.response.status === 403 || error.response.status === 401)
+		if (
+			error.response.status === 403 ||
+			error.response.status === 422
+		)
 			return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
-		if (error.response.status === 422)
-			return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
+
 		return new NextResponse('Error', { status: 500, statusText: 'Internal server error' })
 	}
 
