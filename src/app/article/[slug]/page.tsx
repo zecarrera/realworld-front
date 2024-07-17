@@ -1,5 +1,5 @@
 import { getSession } from "@/actions";
-import SingleArticleHeader from "@/components/article/SingleArticleHeader";
+import SingleArticleHeader from "@/components/article/singleArticle/SingleArticleHeader";
 
 type TSingleArticleProps = {
 	params: {

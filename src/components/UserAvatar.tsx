@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 type TUserAvatar = {
 	username: string;
@@ -11,12 +12,14 @@ const UserAvatar: React.FC<TUserAvatar> = ({ username, date, imageUrl }) => {
 
 	return (
 		<div className="w-fit h-fit bg-transparent flex gap-1 items-center">
-			<Avatar>
-				<AvatarImage src={imageUrl} />
-				<AvatarFallback>{username}</AvatarFallback>
-			</Avatar>
+			<Link href={`/profile/${username}`}>
+				<Avatar>
+					<AvatarImage src={imageUrl} />
+					<AvatarFallback>{username}</AvatarFallback>
+				</Avatar>
+			</Link>
 			<div className="w-fit h-fit flex flex-col justify-start">
-				<h1>{username}</h1>
+				<Link href={`/profile/${username}`}>{username}</Link>
 				<p className="opacity-65 font-light">{date}</p>
 			</div>
 		</div>
