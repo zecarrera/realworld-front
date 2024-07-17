@@ -3,11 +3,9 @@ import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
     try {
+        const token: string = req.headers.get('authorization') as string;
         const body = await req.json();
-        if (!body.token)
-            return new NextResponse("Property token is required", {
-                status: 400
-            });
+
         if (!body.title)
             return new NextResponse("Property title is required", {
                 status: 400
@@ -32,7 +30,7 @@ export async function POST(req: Request) {
                 }
             }, {
                 headers: {
-                    'Authorization': `Token ${body.token}`
+                    'Authorization': token
                 }
             })
 

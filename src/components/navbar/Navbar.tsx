@@ -44,8 +44,10 @@ const NavBar = async () => {
 
 	try {
 		if (session.isLoggedIn) {
-			const res = await axios.post("http://localhost:4000/api/user", {
-				token: session.token ? session.token : "",
+			const res = await axios.get("http://localhost:4000/api/user", {
+				headers: {
+					Authorization: `Token ${session.token}`,
+				},
 			});
 			const data = await res.data;
 

@@ -2,20 +2,15 @@ import { NextResponse } from "next/server"
 
 import axios from "axios";
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
     try {
-        const body = await req.json();
+        const token: string = req.headers.get('authorization') as string;
 
-        if (!body.token) {
-            return new NextResponse("Property token is required", {
-                status: 400
-            });
-        }
 
         const res = await axios
             .get(`${process.env.BASE_URL}/user`, {
                 headers: {
-                    'Authorization': `Token ${body.token}`
+                    'Authorization': token
                 }
             })
 
@@ -35,14 +30,8 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
     try {
-
+        const token: string = req.headers.get('authorization') as string;
         const body = await req.json();
-
-        if (!body.token) {
-            return new NextResponse("Property token is required", {
-                status: 400
-            });
-        }
 
         const res = await axios
             .put(`${process.env.BASE_URL}/user`, {
@@ -56,7 +45,7 @@ export async function PUT(req: Request) {
             }, {
 
                 headers: {
-                    'Authorization': `Token ${body.token}`
+                    'Authorization': token
                 }
             })
 

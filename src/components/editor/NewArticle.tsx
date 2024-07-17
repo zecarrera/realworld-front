@@ -64,11 +64,18 @@ export const NewArticle: React.FC<TEditorProps> = ({ token }) => {
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setState((prevState) => ({ ...prevState, loading: true }));
 		await axios
-			.post("/api/articles", {
-				...values,
-				tagList: state.tagList,
-				token,
-			})
+			.post(
+				"/api/articles",
+				{
+					...values,
+					tagList: state.tagList,
+				},
+				{
+					headers: {
+						Authorization: `Token ${token}`,
+					},
+				}
+			)
 			.then((res) => {
 				if (res.data.status === 201) {
 					const { article } = res.data.data;
