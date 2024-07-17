@@ -6,7 +6,7 @@ export const SingleArticleTagList: React.FC<TSingleArticleTagListProps> = ({
 	tagList,
 }) => {
 	return (
-		<div className=" flex flex-wrap gap-2 items-center m-2 min-w-full py-2 px-4 md:px-10 lg:px-14">
+		<div className=" flex flex-wrap gap-2 items-center min-w-full py-7 px-4 md:px-10 lg:px-14">
 			{tagList.map((ele, i) => (
 				<span
 					key={i}

@@ -1,8 +1,13 @@
 import axios from "axios";
 
 import { getSession } from "@/actions";
+import { Separator } from "@/components/ui/separator";
 import SingleArticleHeader from "@/components/article/singleArticle/SingleArticleHeader";
 import { SingleArticleTagList } from "@/components/article/singleArticle/SingleArticleTagList";
+import UserAvatar from "@/components/UserAvatar";
+import FollowButton from "@/components/article/singleArticle/FollowButton";
+import FavoriteArticleButton from "@/components/article/singleArticle/FavoriteButton";
+import { SingleArticleActivity } from "@/components/article/singleArticle/SingleArticleActivity";
 
 type TSingleArticleProps = {
 	params: {
@@ -25,18 +30,35 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 		const { article } = await data.data;
 
 		return (
-			<div>
+			<>
 				<SingleArticleHeader
 					slug={params.slug}
+					image={article.author.image}
 					createdAt={article.createdAt}
 					favorited={article.favorited}
-					favoritesCount={article.favoritesCount}
-					following={article.author.followed}
-					image={article.author.image}
 					username={article.author.username}
+					following={article.author.following}
+					favoritesCount={article.favoritesCount}
 				/>
+				<p className="py-5 px-4 md:px-10 lg:px-14 text-lg">
+					{article.body}
+				</p>
 				<SingleArticleTagList tagList={article.tagList} />
-			</div>
+				<div className="py-2 px-4 md:px-10 lg:px-14">
+					<Separator />
+				</div>
+
+				<SingleArticleActivity
+					slug={params.slug}
+					image={article.author.image}
+					favorited={article.favorited}
+					createdAt={article.createdAt}
+					username={article.author.username}
+					following={article.author.following}
+					favoritesCount={article.favoritesCount}
+					className="my-5 mx-3 md:justify-center"
+				/>
+			</>
 		);
 	} catch (err) {
 		//console.log(err);
