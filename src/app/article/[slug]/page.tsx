@@ -2,11 +2,9 @@ import axios from "axios";
 
 import { getSession } from "@/actions";
 import { Separator } from "@/components/ui/separator";
+import { CommentForm } from "@/components/article/comments/CommentForm";
 import SingleArticleHeader from "@/components/article/singleArticle/SingleArticleHeader";
 import { SingleArticleTagList } from "@/components/article/singleArticle/SingleArticleTagList";
-import UserAvatar from "@/components/UserAvatar";
-import FollowButton from "@/components/article/singleArticle/FollowButton";
-import FavoriteArticleButton from "@/components/article/singleArticle/FavoriteButton";
 import { SingleArticleActivity } from "@/components/article/singleArticle/SingleArticleActivity";
 
 type TSingleArticleProps = {
@@ -58,6 +56,7 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 					favoritesCount={article.favoritesCount}
 					className="my-5 mx-3 md:justify-center"
 				/>
+				<CommentForm token="" />
 			</>
 		);
 	} catch (err) {

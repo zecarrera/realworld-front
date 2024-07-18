@@ -22,6 +22,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { TError } from "@/app/api/(auth)/login/interfaces/error";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
+import { TStateProp } from "@/components/article/comments/CommentForm";
 
 const formSchema = z.object({
 	title: z.string().min(1),
@@ -29,15 +30,6 @@ const formSchema = z.object({
 	body: z.string().min(1),
 	tagList: z.string().optional(),
 });
-
-type TStateProp = {
-	loading: boolean;
-	isError: boolean;
-	errors: {
-		[key: string]: string[];
-	};
-	tagList: string[];
-};
 
 type TEditorProps = {
 	token: string;
