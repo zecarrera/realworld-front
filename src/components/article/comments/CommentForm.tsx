@@ -20,7 +20,7 @@ import { TError } from "@/app/api/(auth)/login/interfaces/error";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
 
 const formSchema = z.object({
-	comment: z.string().min(1),
+	body: z.string().min(1),
 });
 
 export type TStateProp = {
@@ -33,11 +33,16 @@ export type TStateProp = {
 };
 
 type TCommentProps = {
+	slug: string;
 	token: string;
 	avatar: React.ReactNode;
 };
 
-export const CommentForm: React.FC<TCommentProps> = ({ token, avatar }) => {
+export const CommentForm: React.FC<TCommentProps> = ({
+	token,
+	avatar,
+	slug,
+}) => {
 	const [state, setState] = useState<TStateProp>({
 		loading: false,
 		isError: false,
@@ -48,18 +53,18 @@ export const CommentForm: React.FC<TCommentProps> = ({ token, avatar }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			comment: "",
+			body: "",
 		},
 	});
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setState((prevState) => ({ ...prevState, loading: true }));
+
 		await axios
 			.post(
-				"/api/articles",
+				`/api/articles/${slug}/comments`,
 				{
 					...values,
-					tagList: state.tagList,
 				},
 				{
 					headers: {
@@ -68,10 +73,11 @@ export const CommentForm: React.FC<TCommentProps> = ({ token, avatar }) => {
 				}
 			)
 			.then((res) => {
-				if (res.data.status === 201) {
-					const { article } = res.data.data;
+				if (res.data.status === 200) {
+					const { comment } = res.data.data;
 					setState((prevState) => ({ ...prevState, loading: false }));
-					window.location.assign(`/article/${article.slug}`);
+					console.log(comment);
+					window.location.assign(`/article/${slug}`);
 				} else {
 					setState((prevState) => ({
 						...prevState,
@@ -82,7 +88,7 @@ export const CommentForm: React.FC<TCommentProps> = ({ token, avatar }) => {
 				}
 			})
 			.catch((err) => {
-				console.log("From Editor page", err);
+				console.log("FROM SINGLE ARTICLE COMMENT FORM", err);
 				const errors: TError = {
 					"": [err.response.statusText],
 				};
@@ -108,7 +114,7 @@ export const CommentForm: React.FC<TCommentProps> = ({ token, avatar }) => {
 				>
 					<FormField
 						control={form.control}
-						name="comment"
+						name="body"
 						disabled={state.loading}
 						render={({ field }) => (
 							<FormItem>
@@ -116,6 +122,7 @@ export const CommentForm: React.FC<TCommentProps> = ({ token, avatar }) => {
 									<Textarea
 										placeholder="Write a comment..."
 										{...field}
+										disabled={state.loading}
 										className="text-md p-5 rounded-none border-t-0 border-x-0 border-b text-gray-400 placeholder:text-gray-400  focus-visible:ring-0 focus-visible:ring-offset-0"
 									/>
 								</FormControl>

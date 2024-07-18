@@ -59,6 +59,7 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 				<CommentForm
 					avatar={<AvatarImg username={session.username as string} />}
 					token={session.token as string}
+					slug={params.slug}
 				/>
 			</>
 		);
