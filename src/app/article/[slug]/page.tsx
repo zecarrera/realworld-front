@@ -7,6 +7,7 @@ import SingleArticleHeader from "@/components/article/singleArticle/SingleArticl
 import { SingleArticleTagList } from "@/components/article/singleArticle/SingleArticleTagList";
 import { SingleArticleActivity } from "@/components/article/singleArticle/SingleArticleActivity";
 import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
+import { Comments } from "@/components/article/comments/Comments";
 
 type TSingleArticleProps = {
 	params: {
@@ -28,7 +29,6 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 		const data = await res.data;
 
 		const { article } = await data.data;
-
 		return (
 			<>
 				<SingleArticleHeader
@@ -61,6 +61,7 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 					token={session.token as string}
 					slug={params.slug}
 				/>
+				<Comments slug={params.slug} token={session.token as string} />
 			</>
 		);
 	} catch (err) {

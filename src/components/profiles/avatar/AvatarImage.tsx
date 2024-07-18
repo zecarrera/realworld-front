@@ -2,12 +2,17 @@ import axios from "axios";
 
 import { getSession } from "@/actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 
 type TAvatarImageProps = {
 	username: string;
+	className?: string;
 };
 
-export const AvatarImg: React.FC<TAvatarImageProps> = async ({ username }) => {
+export const AvatarImg: React.FC<TAvatarImageProps> = async ({
+	username,
+	className,
+}) => {
 	const session = await getSession();
 
 	try {
@@ -24,7 +29,7 @@ export const AvatarImg: React.FC<TAvatarImageProps> = async ({ username }) => {
 		const { profile } = await data.data;
 
 		return (
-			<Avatar>
+			<Avatar className={cn(className)}>
 				<AvatarImage src={profile.image} />
 				<AvatarFallback>{profile.username}</AvatarFallback>
 			</Avatar>

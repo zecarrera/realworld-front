@@ -100,3 +100,22 @@ export const unFavoriteArticle = async (slug: string, username: string) => {
         console.log('UNFAVORITE_ARTICLE_ACTION', error)
     }
 }
+
+// Comments
+export const deleteComment = async (slug: string, id: number) => {
+    const session = await getSession();
+
+    try {
+        const res = await axios.delete(`${process.env.BASE_URL}/articles/${slug}/comments/${id}`, {
+            headers: {
+                'Authorization': `Token ${session.token}`
+            }
+        })
+        if (res.status === 200) {
+            revalidatePath(`/articles/${slug}`)
+        }
+
+    } catch (error: any) {
+        console.log('DELETE_COMMENT_ACTION', error)
+    }
+}

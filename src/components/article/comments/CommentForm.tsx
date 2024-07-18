@@ -102,7 +102,7 @@ export const CommentForm: React.FC<TCommentProps> = ({
 	}
 
 	return (
-		<div className="my-5 mx-2 md:w-3/6 md:mx-auto  ">
+		<div className="my-5 mx-2 md:w-3/6 md:mx-auto">
 			{state.isError && (
 				<FormattedErrors data={state.errors} className="ml-5" />
 			)}
@@ -136,7 +136,7 @@ export const CommentForm: React.FC<TCommentProps> = ({
 						<Button
 							type="submit"
 							disabled={state.loading}
-							className="bg-green-custom opacity-85 h-fit py-1 rounded-md  text-sm hover:bg-green-custom hover:opacity-100"
+							className="bg-green-custom opacity-85 h-fit py-1 rounded-md font-bold tracking-wider text-sm hover:bg-green-custom hover:opacity-100"
 						>
 							Post Comment
 						</Button>
