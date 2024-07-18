@@ -5,7 +5,6 @@ import {
 
 const SingleArticleHeader: React.FC<TSingleArticleActivity> = async ({
 	slug,
-	image,
 	username,
 	createdAt,
 	following,
@@ -18,7 +17,6 @@ const SingleArticleHeader: React.FC<TSingleArticleActivity> = async ({
 			<h1 className="text-5xl mx-auto w-fit h-fit">{slug}</h1>
 			<SingleArticleActivity
 				slug={slug}
-				image={image}
 				username={username}
 				createdAt={createdAt}
 				following={following}

@@ -1,11 +1,10 @@
 import { cn } from "@/lib/utils";
-import UserAvatar from "@/components/UserAvatar";
+import UserAvatar from "@/components/profiles/avatar/UserAvatar";
 import FollowButton from "@/components/article/singleArticle/FollowButton";
 import FavoriteArticleButton from "@/components/article/singleArticle/FavoriteButton";
 
 export type TSingleArticleActivity = {
 	slug: string;
-	image: string;
 	username: string;
 	className?: string;
 	createdAt: string;
@@ -16,7 +15,6 @@ export type TSingleArticleActivity = {
 
 export const SingleArticleActivity: React.FC<TSingleArticleActivity> = ({
 	slug,
-	image,
 	username,
 	createdAt,
 	className,
@@ -30,7 +28,7 @@ export const SingleArticleActivity: React.FC<TSingleArticleActivity> = ({
 				`flex flex-col md:flex-row gap-5 md:items-end ${className}`
 			)}
 		>
-			<UserAvatar date={createdAt} imageUrl={image} username={username} />
+			<UserAvatar date={createdAt} username={username} />
 			<div className="flex gap-2 md:mb-1">
 				<FollowButton username={username} following={following} />
 				<FavoriteArticleButton

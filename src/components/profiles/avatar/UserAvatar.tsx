@@ -1,22 +1,19 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+
+import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
 
 type TUserAvatar = {
 	username: string;
 	date: string;
-	imageUrl?: string;
 };
 
-const UserAvatar: React.FC<TUserAvatar> = ({ username, date, imageUrl }) => {
+const UserAvatar: React.FC<TUserAvatar> = ({ username, date }) => {
 	date = new Date(date).toDateString().slice(4);
 
 	return (
 		<div className="w-fit h-fit bg-transparent flex gap-1 items-center">
 			<Link href={`/profile/${username}`}>
-				<Avatar>
-					<AvatarImage src={imageUrl} />
-					<AvatarFallback>{username}</AvatarFallback>
-				</Avatar>
+				<AvatarImg username={username} />
 			</Link>
 			<div className="w-fit h-fit flex flex-col justify-start">
 				<Link href={`/profile/${username}`}>{username}</Link>

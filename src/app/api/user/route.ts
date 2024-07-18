@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 
 import axios from "axios";
+import { getSession } from "@/actions";
 
 export async function GET(req: Request) {
     try {
@@ -48,6 +49,15 @@ export async function PUT(req: Request) {
                     'Authorization': token
                 }
             })
+
+        const data = await res.data
+        const session = await getSession();
+
+        session.isLoggedIn = true;
+        session.email = data.user.email;
+        session.username = data.user.username;
+        session.token = data.user.token;
+        await session.save();
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {

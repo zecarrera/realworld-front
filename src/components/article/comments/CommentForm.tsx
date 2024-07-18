@@ -18,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { TError } from "@/app/api/(auth)/login/interfaces/error";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const formSchema = z.object({
 	comment: z.string().min(1),
@@ -35,9 +34,10 @@ export type TStateProp = {
 
 type TCommentProps = {
 	token: string;
+	avatar: React.ReactNode;
 };
 
-export const CommentForm: React.FC<TCommentProps> = ({ token }) => {
+export const CommentForm: React.FC<TCommentProps> = ({ token, avatar }) => {
 	const [state, setState] = useState<TStateProp>({
 		loading: false,
 		isError: false,
@@ -96,7 +96,7 @@ export const CommentForm: React.FC<TCommentProps> = ({ token }) => {
 	}
 
 	return (
-		<div className="w-4/5 md:w-3/6 mx-auto my-5 ">
+		<div className="my-5 mx-2 md:w-3/6 md:mx-auto  ">
 			{state.isError && (
 				<FormattedErrors data={state.errors} className="ml-5" />
 			)}
@@ -125,10 +125,7 @@ export const CommentForm: React.FC<TCommentProps> = ({ token }) => {
 					/>
 
 					<div className="flex justify-between items-center p-3 bg-gray-100">
-						<Avatar className="border">
-							<AvatarImage src="" />
-							<AvatarFallback>{"username"}</AvatarFallback>
-						</Avatar>
+						{avatar}
 						<Button
 							type="submit"
 							disabled={state.loading}

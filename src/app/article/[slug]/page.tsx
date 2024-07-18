@@ -6,6 +6,7 @@ import { CommentForm } from "@/components/article/comments/CommentForm";
 import SingleArticleHeader from "@/components/article/singleArticle/SingleArticleHeader";
 import { SingleArticleTagList } from "@/components/article/singleArticle/SingleArticleTagList";
 import { SingleArticleActivity } from "@/components/article/singleArticle/SingleArticleActivity";
+import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
 
 type TSingleArticleProps = {
 	params: {
@@ -14,6 +15,7 @@ type TSingleArticleProps = {
 };
 const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 	const session = await getSession();
+
 	try {
 		const res = await axios.get(
 			`http://localhost:4000/api/articles/${params.slug}`,
@@ -31,14 +33,13 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 			<>
 				<SingleArticleHeader
 					slug={params.slug}
-					image={article.author.image}
 					createdAt={article.createdAt}
 					favorited={article.favorited}
 					username={article.author.username}
 					following={article.author.following}
 					favoritesCount={article.favoritesCount}
 				/>
-				<p className="py-5 px-4 md:px-10 lg:px-14 text-lg">
+				<p className="py-5 px-4 md:px-10 lg:px-14 text-lg text-justify">
 					{article.body}
 				</p>
 				<SingleArticleTagList tagList={article.tagList} />
@@ -48,7 +49,6 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 
 				<SingleArticleActivity
 					slug={params.slug}
-					image={article.author.image}
 					favorited={article.favorited}
 					createdAt={article.createdAt}
 					username={article.author.username}
@@ -56,7 +56,10 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 					favoritesCount={article.favoritesCount}
 					className="my-5 mx-3 md:justify-center"
 				/>
-				<CommentForm token="" />
+				<CommentForm
+					avatar={<AvatarImg username={session.username as string} />}
+					token={session.token as string}
+				/>
 			</>
 		);
 	} catch (err) {
