@@ -1,5 +1,7 @@
-
-
 export const ArticleList = () => {
-	return <div>ArticleList</div>;
+	return (
+		<div>
+			article list
+		</div>
+	);
 };

@@ -1,14 +1,14 @@
 import axios from "axios";
 
 import { getSession } from "@/actions";
+import { TagList } from "@/components/tag/TagList";
 import { Separator } from "@/components/ui/separator";
-import { CommentForm } from "@/components/article/comments/CommentForm";
-import SingleArticleHeader from "@/components/article/singleArticle/SingleArticleHeader";
-import { SingleArticleTagList } from "@/components/article/singleArticle/SingleArticleTagList";
-import { SingleArticleActivity } from "@/components/article/singleArticle/SingleArticleActivity";
-import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
 import { Comments } from "@/components/article/comments/Comments";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
+import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
+import { CommentForm } from "@/components/article/comments/CommentForm";
+import SingleArticleHeader from "@/components/article/singleArticle/SingleArticleHeader";
+import { SingleArticleActivity } from "@/components/article/singleArticle/SingleArticleActivity";
 
 type TSingleArticleProps = {
 	params: {
@@ -44,7 +44,7 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 					<p className="py-5 px-4 md:px-10 lg:px-14 text-lg text-justify">
 						{article.body}
 					</p>
-					<SingleArticleTagList tagList={article.tagList} />
+					<TagList tagList={article.tagList} />
 					<div className="py-2 px-4 md:px-10 lg:px-14">
 						<Separator />
 					</div>

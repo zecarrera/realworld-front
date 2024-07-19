@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { getSession } from "@/actions";
 import { Header } from "@/components/home/Header";
-import { TagList } from "@/components/home/TagList";
+import { PopularTag } from "@/components/home/PopularTag";
 import { ArticleList } from "@/components/home/ArticleList";
 import { ArticleHeader } from "@/components/home/ArticleHeader";
 
@@ -17,7 +17,7 @@ export default async function Home() {
 	return (
 		<main>
 			<Header />
-			<div className="flex min-w-full py-2 px-4 md:px-10 lg:px-14 mt-10">
+			<div className="min-w-full flex flex-col gap-5 md:flex-row  py-2 px-4 md:px-10 lg:px-14 mt-10">
 				<div className="flex-1">
 					<ArticleHeader
 						choices={[
@@ -33,7 +33,7 @@ export default async function Home() {
 					/>
 					<ArticleList />
 				</div>
-				<TagList />
+				<PopularTag />
 			</div>
 		</main>
 	);
