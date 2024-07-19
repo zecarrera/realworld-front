@@ -19,10 +19,11 @@ export async function GET(req: Request, ctx: { params: { slug: string } }) {
 
 
     } catch (error: any) {
-        console.error('API_SINGLE_ARTICLE_GET', error)
+        //console.error('API_SINGLE_ARTICLE_GET', error)
         if (
             error.response.status === 401 ||
-            error.response.status === 422
+            error.response.status === 422 ||
+            error.response.status === 404
         ) {
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
         }

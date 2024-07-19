@@ -17,13 +17,12 @@ const UserAvatar: React.FC<TUserAvatar> = ({
 	avatarH,
 }) => {
 	date = new Date(date).toDateString().slice(4);
-
 	return (
 		<div className="w-fit h-fit bg-transparent flex gap-1 items-center">
 			<Link href={`/profile/${username}`}>
 				<AvatarImg
 					username={username}
-					className={`h-${avatarH} w-${avatarH}`}
+					className={cn(avatarH && `h-${avatarH} w-${avatarH}`)}
 				/>
 			</Link>
 			<div
