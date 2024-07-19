@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { getSession } from "@/actions";
 import ProfileHeader from "@/components/profiles/ProfileHeader";
+import { ArticleHeader } from "@/components/home/ArticleHeader";
 
 type TProfilePageProps = {
 	username: string;
@@ -27,6 +28,17 @@ const ProfilePage = async ({ params }: { params: TProfilePageProps }) => {
 		return (
 			<div className="">
 				<ProfileHeader profile={profile} />
+				<div className="min-w-full py-2 px-4 md:px-10 lg:px-14 mt-10">
+					<ArticleHeader
+						choices={[
+							{ name: "My Articles", query: "" },
+							{
+								name: "Favorited Articles",
+								query: `favorite=true`,
+							},
+						]}
+					/>
+				</div>
 			</div>
 		);
 	} catch (err) {

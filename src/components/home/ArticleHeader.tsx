@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
 
 type TArticleHeader = {
 	choices: {
@@ -14,13 +14,14 @@ type TArticleHeader = {
 };
 
 export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
+	const path = usePathname();
 	const searchParams = useSearchParams();
 	const search = searchParams.entries().next();
 	let query: string = search.value ? search.value.join("=") : "";
 
 	return (
 		<div>
-			<div className="flex gap-3 ">
+			<div className="flex gap-3">
 				{choices.map((choice, i) => (
 					<Link
 						className={cn(
@@ -30,7 +31,7 @@ export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
 								" border-b-green-custom text-green-custom"
 						)}
 						key={i}
-						href={`/?${choice.query}`}
+						href={`${path}/?${choice.query}`}
 						id=""
 					>
 						{choice.name}
