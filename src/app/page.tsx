@@ -5,6 +5,8 @@ import { Header } from "@/components/home/Header";
 import { PopularTag } from "@/components/home/PopularTag";
 import { ArticleList } from "@/components/home/ArticleList";
 import { ArticleHeader } from "@/components/home/ArticleHeader";
+import { Suspense } from "react";
+import { Loading } from "@/components/loading/Loading";
 
 export const metadata: Metadata = {
 	title: "Home — Conduit",
@@ -33,7 +35,9 @@ export default async function Home() {
 					/>
 					<ArticleList />
 				</div>
-				<PopularTag />
+				<Suspense fallback={<Loading />}>
+					<PopularTag />
+				</Suspense>
 			</div>
 		</main>
 	);

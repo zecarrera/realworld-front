@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
+import { Tag } from "@/components/tag/Tag";
 
 type TTagListProps = {
 	tagList: string[];
 	className?: string;
-	onClick?: () => void;
+	isClickable?: boolean;
 	innerClassName?: string;
 };
 
@@ -11,7 +12,7 @@ export const TagList: React.FC<TTagListProps> = ({
 	tagList,
 	className,
 	innerClassName,
-	onClick,
+	isClickable,
 }) => {
 	return (
 		<div
@@ -21,16 +22,12 @@ export const TagList: React.FC<TTagListProps> = ({
 			)}
 		>
 			{tagList.map((ele, i) => (
-				<span
+				<Tag
 					key={i}
-					onClick={onClick}
-					className={cn(
-						"border border-gray-300 rounded-full text-center text-gray-300 px-3 w-fit h-fit text-sm ",
-						innerClassName
-					)}
-				>
-					{ele}
-				</span>
+					ele={ele}
+					className={innerClassName}
+					isClickable={isClickable}
+				/>
 			))}
 		</div>
 	);

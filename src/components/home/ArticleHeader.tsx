@@ -32,11 +32,15 @@ export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
 						)}
 						key={i}
 						href={`${path}/?${choice.query}`}
-						id=""
 					>
 						{choice.name}
 					</Link>
 				))}
+				{search.value && search.value[0] === "tag" && (
+					<h1 className="opacity-85 pb-2 hover:opacity-100 border-b px-3 text-lg border-b-green-custom text-green-custom">
+						#{search.value[1]}
+					</h1>
+				)}
 			</div>
 			<Separator />
 		</div>

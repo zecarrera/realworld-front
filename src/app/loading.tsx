@@ -1,3 +1,5 @@
-export default function Loading() {
-	return <h1 className="w-fit mx-auto my-auto">Loading....</h1>;
+import { Loading } from "@/components/loading/Loading";
+
+export default function LoadingPage() {
+	return <Loading />;
 }
