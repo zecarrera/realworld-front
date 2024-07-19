@@ -17,12 +17,15 @@ export async function GET(req: Request) {
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        //console.error('API_USER_POST', error)
-        if (
-            error.response.status === 401 ||
-            error.response.status === 422
+        console.error('API_USER_GET', error)
+        if (error.response.status === 422
         ) {
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
+        }
+
+        if (error.response.status === 401) {
+            return NextResponse.json({ data: { "Error": [error.response.data.message] }, status: error.response.status })
+
         }
         return new NextResponse('Error', { status: 500, statusText: 'Internal server error' })
     }

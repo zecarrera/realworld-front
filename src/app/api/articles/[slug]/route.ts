@@ -19,7 +19,7 @@ export async function GET(req: Request, ctx: { params: { slug: string } }) {
 
 
     } catch (error: any) {
-        //console.error('API_SINGLE_ARTICLE_GET', error)
+        //console.error('API_SINGLE_ARTICLE_GET', error.response.data)
         if (
             error.response.status === 401 ||
             error.response.status === 422 ||
