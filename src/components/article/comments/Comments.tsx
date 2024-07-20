@@ -34,7 +34,7 @@ export const Comments: React.FC<TCommentsProps> = async ({ slug, token }) => {
 								username={comment.author.username}
 								date={comment.createdAt}
 								className="flex-row gap-2 text-slate-400"
-								avatarH={5}
+								avatarH={7}
 							/>
 							<DeleteCommentButton slug={slug} id={comment.id} />
 						</div>
