@@ -64,7 +64,7 @@ export const unFollow = async (username: string) => {
 
 // Favorites
 
-export const favoriteArticle = async (slug: string, username: string) => {
+export const favoriteArticle = async (slug: string, username: string, refreshUrl: string) => {
     const session = await getSession();
     try {
         const res = await axios.post(`${process.env.BASE_URL}/articles/${slug}/favorite`, {
@@ -75,7 +75,7 @@ export const favoriteArticle = async (slug: string, username: string) => {
             }
         })
         if (res.status === 200) {
-            revalidatePath(`/profile/${username}`)
+            revalidatePath(refreshUrl)
         }
 
     } catch (error: any) {
@@ -83,7 +83,7 @@ export const favoriteArticle = async (slug: string, username: string) => {
     }
 }
 
-export const unFavoriteArticle = async (slug: string, username: string) => {
+export const unFavoriteArticle = async (slug: string, username: string, refreshUrl: string) => {
     const session = await getSession();
 
     try {
@@ -93,7 +93,7 @@ export const unFavoriteArticle = async (slug: string, username: string) => {
             }
         })
         if (res.status === 200) {
-            revalidatePath(`/profile/${username}`)
+            revalidatePath(refreshUrl)
         }
 
     } catch (error: any) {

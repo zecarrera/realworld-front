@@ -11,8 +11,8 @@ type TTagListProps = {
 export const TagList: React.FC<TTagListProps> = ({
 	tagList,
 	className,
-	innerClassName,
 	isClickable,
+	innerClassName,
 }) => {
 	return (
 		<div

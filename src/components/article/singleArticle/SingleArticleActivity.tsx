@@ -32,9 +32,11 @@ export const SingleArticleActivity: React.FC<TSingleArticleActivity> = ({
 			<div className="flex gap-2 md:mb-1">
 				<FollowButton username={username} following={following} />
 				<FavoriteArticleButton
+					haveText
 					slug={slug}
-					favorite={favorited}
 					username={username}
+					favorite={favorited}
+					refreshUrl={`/article/${slug}`}
 					favoritesCount={favoritesCount}
 				/>
 			</div>

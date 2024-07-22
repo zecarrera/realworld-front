@@ -4,17 +4,17 @@ import { cn } from "@/lib/utils";
 import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
 
 type TUserAvatar = {
-	username: string;
 	date: string;
-	className?: string;
 	avatarH?: number;
+	username: string;
+	className?: string;
 };
 
 const UserAvatar: React.FC<TUserAvatar> = ({
-	username,
 	date,
-	className,
 	avatarH,
+	username,
+	className,
 }) => {
 	date = new Date(date).toDateString().slice(4);
 	return (

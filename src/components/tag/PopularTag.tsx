@@ -12,12 +12,15 @@ export const PopularTag = async () => {
 		if (data.status === 200) {
 			const { tags } = await data.data;
 			return (
-				<TagList
-					isClickable
-					tagList={tags}
-					className="p-0 md:px-0 lg:px-0 mt-2"
-					innerClassName="cursor-pointer bg-gray-500 opacity-90 hover:opacity-100 text-white border-none"
-				/>
+				<div className="bg-slate-100 shadow-custom rounded p-3 h-fit md:w-52">
+					<h1>Popular Tags</h1>
+					<TagList
+						isClickable
+						tagList={tags}
+						className="p-0 md:px-0 lg:px-0 mt-2"
+						innerClassName="cursor-pointer bg-gray-500 opacity-90 hover:opacity-100 text-white border-none"
+					/>
+				</div>
 			);
 		} else {
 			return (

@@ -34,15 +34,12 @@ export default async function Home() {
 						]}
 					/>
 					<Suspense fallback={<Loading height={5} width={5} />}>
-						<ArticleList />
+						<ArticleList token={session.token as string} />
 					</Suspense>
 				</div>
-				<div className="bg-slate-100  shadow-custom rounded p-3 md:w-52">
-					<h1>Popular Tags</h1>
-					<Suspense fallback={<Loading height={5} width={5} />}>
-						<PopularTag />
-					</Suspense>
-				</div>
+				<Suspense fallback={<Loading height={5} width={5} />}>
+					<PopularTag />
+				</Suspense>
 			</div>
 		</main>
 	);

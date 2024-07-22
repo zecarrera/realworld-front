@@ -1,21 +1,36 @@
 import axios from "axios";
 
+import { Article } from "@/components/article/Article";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
 
-export const ArticleList = async () => {
+export const ArticleList: React.FC<{ token: string }> = async ({ token }) => {
 	try {
-		const res = await axios.get(`http://localhost:4000/api/articles`);
+		const res = await axios.get(`http://localhost:4000/api/articles`, {
+			headers: {
+				Authorization: `Token ${token}`,
+			},
+		});
 
 		const data = await res.data;
 		if (data.status === 200) {
 			const { articles } = await data.data;
-			console.log(articles)
+			console.log(articles);
 			return (
-				<>
-					{articles.map((article: any) => (
-						<h1>{article.slug}</h1>
+				<div className="my-5">
+					{articles.map((article: any, i: number) => (
+						<Article
+							key={i}
+							slug={article.slug}
+							title={article.title}
+							date={article.updatedAt}
+							description={article.description}
+							username={article.author.username}
+							favorited={article.favorited}
+							favoritesCount={article.favoritesCount}
+							tagList={article.tagList}
+						/>
 					))}
-				</>
+				</div>
 			);
 		} else {
 			return (
