@@ -14,7 +14,6 @@ export const ArticleList: React.FC<{ token: string }> = async ({ token }) => {
 		const data = await res.data;
 		if (data.status === 200) {
 			const { articles } = await data.data;
-			console.log(articles);
 			return (
 				<div className="my-5">
 					{articles.map((article: any, i: number) => (

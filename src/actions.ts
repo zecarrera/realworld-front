@@ -1,10 +1,10 @@
 'use server'
 
 import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { permanentRedirect, redirect } from "next/navigation"
 
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 import { getIronSession } from "iron-session"
 
 import { ISessionData, defaultSession, sessionOptions } from "@/lib/config"
@@ -101,6 +101,27 @@ export const unFavoriteArticle = async (slug: string, username: string, refreshU
     }
 }
 
+// Delete Article
+export const deleteArticle = async (slug: string) => {
+    const session = await getSession();
+    let res: any = {}
+
+    try {
+        res = await axios.delete(`${process.env.BASE_URL}/articles/${slug}`, {
+            headers: {
+                'Authorization': `Token ${session.token}`
+            }
+        })
+
+    } catch (error: any) {
+        console.log('DELETE_ARTICLE_ACTION', error)
+    }
+
+    if (res.status === 204)
+        redirect('/')
+}
+
+
 // Comments
 export const deleteComment = async (slug: string, id: number) => {
     const session = await getSession();
@@ -119,3 +140,5 @@ export const deleteComment = async (slug: string, id: number) => {
         console.log('DELETE_COMMENT_ACTION', error)
     }
 }
+
+

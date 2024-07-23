@@ -1,8 +1,10 @@
 import axios from "axios";
+import { Suspense } from "react";
 
 import { getSession } from "@/actions";
 import { TagList } from "@/components/tag/TagList";
 import { Separator } from "@/components/ui/separator";
+import { Loading } from "@/components/loading/Loading";
 import { Comments } from "@/components/article/comments/Comments";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
 import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
@@ -40,6 +42,9 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 						username={article.author.username}
 						following={article.author.following}
 						favoritesCount={article.favoritesCount}
+						isCurrentUser={
+							session.username === article.author.username
+						}
 					/>
 					<p className="py-5 px-4 md:px-10 lg:px-14 text-lg text-justify">
 						{article.body}
@@ -48,16 +53,20 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 					<div className="py-2 px-4 md:px-10 lg:px-14">
 						<Separator />
 					</div>
-
-					<SingleArticleActivity
-						slug={params.slug}
-						favorited={article.favorited}
-						createdAt={article.createdAt}
-						username={article.author.username}
-						following={article.author.following}
-						favoritesCount={article.favoritesCount}
-						className="my-5 mx-3 md:justify-center"
-					/>
+					<Suspense fallback={<Loading width={15} height={15} />}>
+						<SingleArticleActivity
+							slug={params.slug}
+							favorited={article.favorited}
+							createdAt={article.createdAt}
+							username={article.author.username}
+							following={article.author.following}
+							favoritesCount={article.favoritesCount}
+							isCurrentUser={
+								session.username === article.author.username
+							}
+							className="my-5 mx-3 md:justify-center"
+						/>
+					</Suspense>
 					<CommentForm
 						avatar={
 							<AvatarImg

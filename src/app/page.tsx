@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Metadata } from "next";
 
 import { getSession } from "@/actions";
@@ -5,7 +7,6 @@ import { Header } from "@/components/home/Header";
 import { PopularTag } from "@/components/tag/PopularTag";
 import { ArticleList } from "@/components/home/ArticleList";
 import { ArticleHeader } from "@/components/home/ArticleHeader";
-import { Suspense } from "react";
 import { Loading } from "@/components/loading/Loading";
 
 export const metadata: Metadata = {

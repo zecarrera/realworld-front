@@ -9,8 +9,9 @@ const SingleArticleHeader: React.FC<TSingleArticleActivity> = async ({
 	createdAt,
 	following,
 	favorited,
-	favoritesCount,
 	className,
+	isCurrentUser,
+	favoritesCount,
 }) => {
 	return (
 		<div className="min-w-full py-2 px-4 md:px-10 lg:px-14 flex flex-col gap-5 bg-black-custom shadow-custom text-white">
@@ -21,8 +22,9 @@ const SingleArticleHeader: React.FC<TSingleArticleActivity> = async ({
 				createdAt={createdAt}
 				following={following}
 				favorited={favorited}
-				favoritesCount={favoritesCount}
 				className={className}
+				favoritesCount={favoritesCount}
+				isCurrentUser={isCurrentUser}
 			/>
 		</div>
 	);
