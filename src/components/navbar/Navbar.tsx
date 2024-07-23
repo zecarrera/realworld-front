@@ -29,7 +29,7 @@ const NavBar = async () => {
 			isLoggedIn: !session.isLoggedIn,
 		},
 		{
-			href: "/editor",
+			href: "/editor/new",
 			name: "New Article",
 			icon: <FilePenLine className="m-auto" width={16} height={16} />,
 			isLoggedIn: session.isLoggedIn,

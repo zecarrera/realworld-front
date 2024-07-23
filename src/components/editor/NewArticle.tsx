@@ -32,68 +32,128 @@ const formSchema = z.object({
 });
 
 type TEditorProps = {
+	body?: string;
+	slug?: string;
 	token: string;
+	title?: string;
+	tagList?: string[];
+	description?: string;
 };
 
-export const NewArticle: React.FC<TEditorProps> = ({ token }) => {
+export const NewArticle: React.FC<TEditorProps> = ({
+	slug,
+	body,
+	token,
+	title,
+	tagList,
+	description,
+}) => {
 	const [state, setState] = useState<TStateProp>({
 		loading: false,
 		isError: false,
 		errors: {},
-		tagList: [],
+		tagList: tagList ? tagList : [],
 	});
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			title: "",
-			description: "",
-			body: "",
+			title: title ? title : "",
+			description: description ? description : "",
+			body: body ? body : "",
 			tagList: "",
 		},
 	});
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setState((prevState) => ({ ...prevState, loading: true }));
-		await axios
-			.post(
-				"/api/articles",
-				{
-					...values,
-					tagList: state.tagList,
-				},
-				{
-					headers: {
-						Authorization: `Token ${token}`,
+		if (slug) {
+			await axios
+				.put(
+					`/api/articles/${slug}`,
+					{
+						...values,
+						tagList: state.tagList,
 					},
-				}
-			)
-			.then((res) => {
-				if (res.data.status === 201) {
-					const { article } = res.data.data;
-					setState((prevState) => ({ ...prevState, loading: false }));
-					window.location.assign(`/article/${article.slug}`);
-				} else {
+					{
+						headers: {
+							Authorization: `Token ${token}`,
+						},
+					}
+				)
+				.then((res) => {
+					if (res.data.status === 200) {
+						const { article } = res.data.data;
+						setState((prevState) => ({
+							...prevState,
+							loading: false,
+						}));
+						window.location.assign(`/article/${article.slug}`);
+					} else {
+						setState((prevState) => ({
+							...prevState,
+							loading: false,
+							isError: true,
+							errors: res.data.data,
+						}));
+					}
+				})
+				.catch((err) => {
+					console.log("From New Article", err);
+					const errors: TError = {
+						"": [err.response.statusText],
+					};
 					setState((prevState) => ({
 						...prevState,
 						loading: false,
 						isError: true,
-						errors: res.data.data,
+						errors,
 					}));
-				}
-			})
-			.catch((err) => {
-				console.log("From Editor page", err);
-				const errors: TError = {
-					"": [err.response.statusText],
-				};
-				setState((prevState) => ({
-					...prevState,
-					loading: false,
-					isError: true,
-					errors,
-				}));
-			});
+				});
+		} else {
+			await axios
+				.post(
+					"/api/articles",
+					{
+						...values,
+						tagList: state.tagList,
+					},
+					{
+						headers: {
+							Authorization: `Token ${token}`,
+						},
+					}
+				)
+				.then((res) => {
+					if (res.data.status === 201) {
+						const { article } = res.data.data;
+						setState((prevState) => ({
+							...prevState,
+							loading: false,
+						}));
+						window.location.assign(`/article/${article.slug}`);
+					} else {
+						setState((prevState) => ({
+							...prevState,
+							loading: false,
+							isError: true,
+							errors: res.data.data,
+						}));
+					}
+				})
+				.catch((err) => {
+					console.log("From New Article", err);
+					const errors: TError = {
+						"": [err.response.statusText],
+					};
+					setState((prevState) => ({
+						...prevState,
+						loading: false,
+						isError: true,
+						errors,
+					}));
+				});
+		}
 	}
 
 	return (
@@ -201,7 +261,7 @@ export const NewArticle: React.FC<TEditorProps> = ({ token }) => {
 					<div className="flex">
 						{state.tagList.map((ele, index) => (
 							<span
-								className="bg-gray-400 p-2 mr-1 rounded-full flex w-fit h-fit gap-1 justify-center items-center"
+								className="bg-gray-400 p-1 mr-1 rounded-full flex w-fit h-fit gap-[2px] text-xs justify-center items-center"
 								key={index}
 							>
 								<X

@@ -9,6 +9,12 @@ import { TNavLink } from "@/components/navbar/interfaces/navlink";
 
 const NavLink: React.FC<TNavLink> = ({ href, name, isLoggedIn, icon }) => {
 	const pathname = usePathname();
+	let substring = href.split("/")[1];
+	let exist: boolean = false;
+	exist =
+		substring === ""
+			? pathname === href
+			: pathname.startsWith(`/${substring}`);
 
 	if (isLoggedIn) {
 		return (
@@ -23,7 +29,7 @@ const NavLink: React.FC<TNavLink> = ({ href, name, isLoggedIn, icon }) => {
 				<Button
 					className={cn(
 						"text-slate-300 hover:no-underline hover:text-slate-900",
-						pathname == href && "text-slate-900",
+						exist && "text-slate-900",
 						icon ? "p-1" : ""
 					)}
 					asChild
