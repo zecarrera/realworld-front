@@ -65,12 +65,13 @@ export async function PUT(req: Request) {
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
         console.error('API_USER_PUT', error)
-        if (error.response.status === 401)
+        if (
+            error.response.status === 401 ||
+            error.response.status === 403 ||
+            error.response.status === 422
+        )
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
-        if (error.response.status === 403)
-            return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
-        if (error.response.status === 422)
-            return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
+
         return new NextResponse('Error', { status: 500, statusText: 'Internal server error' })
     }
 }

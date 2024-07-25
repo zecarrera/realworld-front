@@ -48,7 +48,6 @@ export const SingleArticleActivity: React.FC<TSingleArticleActivity> = async ({
 						<FavoriteArticleButton
 							haveText
 							slug={slug}
-							username={username}
 							favorite={favorited}
 							refreshUrl={`/article/${slug}`}
 							favoritesCount={favoritesCount}

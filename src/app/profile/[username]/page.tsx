@@ -17,7 +17,9 @@ const ProfilePage = async ({ params }: { params: TProfilePageProps }) => {
 			`http://localhost:4000/api/profiles/${params.username}`,
 			{
 				headers: {
-					Authorization: `Token ${session.token}`,
+					Authorization: session.token
+						? `Token ${session.token}`
+						: undefined,
 				},
 			}
 		);
@@ -28,7 +30,7 @@ const ProfilePage = async ({ params }: { params: TProfilePageProps }) => {
 			const { profile } = await data.data;
 			return (
 				<div className="">
-					<ProfileHeader profile={profile} />
+					<ProfileHeader profile={profile} session={session} />
 					<div className="min-w-full py-2 px-4 md:px-10 lg:px-14 mt-10">
 						<ArticleHeader
 							choices={[

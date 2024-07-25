@@ -2,17 +2,21 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Settings } from "lucide-react";
+import FollowButton from "../article/singleArticle/FollowButton";
+import { IronSession } from "iron-session";
+import { ISessionData } from "@/lib/config";
 
 export type TProfileHeaderProps = {
 	profile: {
-		username: "string";
-		bio: "string";
-		image: "string";
-		following: true;
+		username: string;
+		bio: string;
+		image: string;
+		following: boolean;
 	};
+	session: IronSession<ISessionData>;
 };
 
-const ProfileHeader: React.FC<TProfileHeaderProps> = ({ profile }) => {
+const ProfileHeader: React.FC<TProfileHeaderProps> = ({ profile, session }) => {
 	return (
 		<div className="px-3 py-5 shadow-custom bg-gray-100 h-fit">
 			<div className="w-full md:w-4/5 lg:w-3/5 mx-auto flex flex-col align-middle items-center justify-center gap-2">
@@ -30,13 +34,31 @@ const ProfileHeader: React.FC<TProfileHeaderProps> = ({ profile }) => {
 				<p className="w-fit h-fit font-light text-gray-400">
 					{profile.bio}
 				</p>
-				<Link
-					href="/settings"
-					className="flex items-center align-middle bg-transparent border border-gray-400 rounded-sm cursor-pointer text-gray-400 p-1 hover:bg-gray-200 ml-auto"
-				>
-					<Settings height={15} width={15} className="mr-1" />
-					Edit Profile Settings
-				</Link>
+				{session.username ? (
+					session.username === profile.username ? (
+						<Link
+							href="/settings"
+							className="flex items-center align-middle bg-transparent border border-gray-400 rounded-sm cursor-pointer text-gray-400 p-1 hover:bg-gray-200 ml-auto"
+						>
+							<Settings height={15} width={15} className="mr-1" />
+							Edit Profile Settings
+						</Link>
+					) : (
+						<div className="w-fit ml-auto">
+							<FollowButton
+								following={profile.following}
+								username={profile.username}
+							/>
+						</div>
+					)
+				) : (
+					<div className="w-fit ml-auto">
+						<FollowButton
+							following={profile.following}
+							username={profile.username}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	);

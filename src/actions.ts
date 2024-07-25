@@ -27,77 +27,99 @@ export const logout = async () => {
 
 export const follow = async (username: string) => {
     const session = await getSession();
-    try {
-        const res = await axios.post(`${process.env.BASE_URL}/profiles/${username}/follow`, {
 
-        }, {
-            headers: {
-                'Authorization': `Token ${session.token}`
+    if (session.token) {
+        try {
+            const res = await axios.post(`${process.env.BASE_URL}/profiles/${username}/follow`, {
+
+            }, {
+                headers: {
+                    'Authorization': `Token ${session.token}`
+                }
+            })
+            if (res.status === 200) {
+                revalidatePath(`/profile/${username}`)
             }
-        })
-        if (res.status === 200) {
-            revalidatePath(`/profile/${username}`)
-        }
 
-    } catch (error: any) {
-        console.log('FOLLOW_USER_ACTION', error)
+        } catch (error: any) {
+            console.log('FOLLOW_USER_ACTION', error)
+        }
+    } else {
+        redirect('/login')
     }
 }
 
 export const unFollow = async (username: string) => {
     const session = await getSession();
 
-    try {
-        const res = await axios.delete(`${process.env.BASE_URL}/profiles/${username}/follow`, {
-            headers: {
-                'Authorization': `Token ${session.token}`
+    if (session.token) {
+        try {
+            const res = await axios.delete(`${process.env.BASE_URL}/profiles/${username}/follow`, {
+                headers: {
+                    'Authorization': `Token ${session.token}`
+                }
+            })
+            if (res.status === 200) {
+                revalidatePath(`/profile/${username}`)
             }
-        })
-        if (res.status === 200) {
-            revalidatePath(`/profile/${username}`)
-        }
 
-    } catch (error: any) {
-        console.log('UNFOLLOW_USER_ACTION', error)
+        } catch (error: any) {
+            console.log('UNFOLLOW_USER_ACTION', error)
+        }
+    }
+    else {
+        redirect('/login')
     }
 }
 
 // Favorites
 
-export const favoriteArticle = async (slug: string, username: string, refreshUrl: string) => {
+export const favoriteArticle = async (slug: string, refreshUrl: string) => {
     const session = await getSession();
-    try {
-        const res = await axios.post(`${process.env.BASE_URL}/articles/${slug}/favorite`, {
 
-        }, {
-            headers: {
-                'Authorization': `Token ${session.token}`
+    if (session.token) {
+
+        try {
+            const res = await axios.post(`${process.env.BASE_URL}/articles/${slug}/favorite`, {
+
+            }, {
+                headers: {
+                    'Authorization': `Token ${session.token}`
+                }
+            })
+            if (res.status === 200) {
+                revalidatePath(refreshUrl)
             }
-        })
-        if (res.status === 200) {
-            revalidatePath(refreshUrl)
-        }
 
-    } catch (error: any) {
-        console.log('FAVORITE_ARTICLE_ACTION', error)
+        } catch (error: any) {
+            console.log('FAVORITE_ARTICLE_ACTION', error)
+        }
+    }
+    else {
+        redirect('/login')
     }
 }
 
-export const unFavoriteArticle = async (slug: string, username: string, refreshUrl: string) => {
+export const unFavoriteArticle = async (slug: string, refreshUrl: string) => {
     const session = await getSession();
 
-    try {
-        const res = await axios.delete(`${process.env.BASE_URL}/articles/${slug}/favorite`, {
-            headers: {
-                'Authorization': `Token ${session.token}`
+    if (session.token) {
+        try {
+            const res = await axios.delete(`${process.env.BASE_URL}/articles/${slug}/favorite`, {
+                headers: {
+                    'Authorization': `Token ${session.token}`
+                }
+            })
+            if (res.status === 200) {
+                revalidatePath(refreshUrl)
             }
-        })
-        if (res.status === 200) {
-            revalidatePath(refreshUrl)
-        }
 
-    } catch (error: any) {
-        console.log('UNFAVORITE_ARTICLE_ACTION', error)
+        } catch (error: any) {
+            console.log('UNFAVORITE_ARTICLE_ACTION', error)
+        }
+    }
+    else {
+        redirect('/login')
     }
 }
 

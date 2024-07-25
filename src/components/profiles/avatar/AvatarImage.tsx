@@ -20,7 +20,9 @@ export const AvatarImg: React.FC<TAvatarImageProps> = async ({
 			`http://localhost:4000/api/profiles/${username}`,
 			{
 				headers: {
-					Authorization: `Token ${session.token}`,
+					Authorization: session.token
+						? `Token ${session.token}`
+						: undefined,
 				},
 			}
 		);

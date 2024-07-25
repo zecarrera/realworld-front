@@ -8,7 +8,6 @@ import { favoriteArticle, unFavoriteArticle } from "@/actions";
 
 type TFavoriteArticleButtonProps = {
 	slug: string;
-	username: string;
 	favorite: boolean;
 	haveText: boolean;
 	refreshUrl: string;
@@ -16,7 +15,6 @@ type TFavoriteArticleButtonProps = {
 };
 const FavoriteArticleButton: React.FC<TFavoriteArticleButtonProps> = ({
 	slug,
-	username,
 	favorite,
 	haveText,
 	refreshUrl,
@@ -27,10 +25,8 @@ const FavoriteArticleButton: React.FC<TFavoriteArticleButtonProps> = ({
 			variant="link"
 			onClick={
 				favorite
-					? async () =>
-							await unFavoriteArticle(slug, username, refreshUrl)
-					: async () =>
-							await favoriteArticle(slug, username, refreshUrl)
+					? async () => await unFavoriteArticle(slug, refreshUrl)
+					: async () => await favoriteArticle(slug, refreshUrl)
 			}
 			className={cn(
 				"m-0 px-2 py-1 h-fit flex gap-1 bg-transparent  border border-green-custom text-green-custom underline-offset-0 hover:no-underline hover:bg-green-custom hover:text-white",

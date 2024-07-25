@@ -11,6 +11,7 @@ import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
 import { CommentForm } from "@/components/article/comments/CommentForm";
 import SingleArticleHeader from "@/components/article/singleArticle/SingleArticleHeader";
 import { SingleArticleActivity } from "@/components/article/singleArticle/SingleArticleActivity";
+import Link from "next/link";
 
 type TSingleArticleProps = {
 	params: {
@@ -25,7 +26,9 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 			`http://localhost:4000/api/articles/${params.slug}`,
 			{
 				headers: {
-					Authorization: `Token ${session.token}`,
+					Authorization: session.token
+						? `Token ${session.token}`
+						: undefined,
 				},
 			}
 		);
@@ -67,20 +70,42 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 							className="my-5 mx-3 md:justify-center"
 						/>
 					</Suspense>
-					<CommentForm
-						avatar={
-							<AvatarImg
-								username={session.username as string}
-								className="h-7 w-7"
+
+					{session.token ? (
+						<>
+							<CommentForm
+								avatar={
+									<AvatarImg
+										username={session.username as string}
+										className="h-7 w-7"
+									/>
+								}
+								token={session.token as string}
+								slug={params.slug}
 							/>
-						}
-						token={session.token as string}
-						slug={params.slug}
-					/>
-					<Comments
-						slug={params.slug}
-						token={session.token as string}
-					/>
+							<Comments
+								slug={params.slug}
+								token={session.token as string}
+							/>
+						</>
+					) : (
+						<div className="w-fit mx-auto mb-5">
+							<Link
+								href="/login"
+								className="text-green-custom hover:underline"
+							>
+								Sign in
+							</Link>{" "}
+							or{" "}
+							<Link
+								href="/register"
+								className="text-green-custom hover:underline"
+							>
+								sign up
+							</Link>{" "}
+							to add comments on this article.
+						</div>
+					)}
 				</>
 			);
 		} else {
