@@ -5,6 +5,7 @@ import NavBar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import { sourceSansPro } from "@/lib/font-loader";
 import { ToasterProvider } from "@/providers/toast-providers";
+import { ArticleQueryStoreProvider } from "@/providers/counter-store-provider";
 
 export const metadata: Metadata = {
 	title: {
@@ -30,7 +31,11 @@ export default function RootLayout({
 					<header>
 						<NavBar />
 					</header>
-					<main>{children}</main>
+					<main>
+						<ArticleQueryStoreProvider>
+							{children}
+						</ArticleQueryStoreProvider>
+					</main>
 					<Footer />
 				</div>
 			</body>
