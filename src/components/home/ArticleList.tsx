@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { Article } from "@/components/article/Article";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
+import { PaginationComponent } from "./PaginationComponent";
 
 export const ArticleList: React.FC<{ token: string }> = async ({ token }) => {
 	try {
@@ -14,23 +15,26 @@ export const ArticleList: React.FC<{ token: string }> = async ({ token }) => {
 		const data = await res.data;
 		if (data.status === 200) {
 			const { articles } = await data.data;
-			console.log(articles)
+			console.log(articles);
 			return (
-				<div className="my-5">
-					{articles.map((article: any, i: number) => (
-						<Article
-							key={i}
-							slug={article.slug}
-							title={article.title}
-							date={article.updatedAt}
-							description={article.description}
-							username={article.author.username}
-							favorited={article.favorited}
-							favoritesCount={article.favoritesCount}
-							tagList={article.tagList}
-						/>
-					))}
-				</div>
+				<>
+					<div className="my-5">
+						{[].map((article: any, i: number) => (
+							<Article
+								key={i}
+								slug={article.slug}
+								title={article.title}
+								date={article.updatedAt}
+								description={article.description}
+								username={article.author.username}
+								favorited={article.favorited}
+								favoritesCount={article.favoritesCount}
+								tagList={article.tagList}
+							/>
+						))}
+					</div>
+					<PaginationComponent />
+				</>
 			);
 		} else {
 			return (
