@@ -11,6 +11,7 @@ type TEditorPageProps = {
 
 const EditorPage: React.FC<TEditorPageProps> = async ({ params }) => {
 	const session = await getSession();
+	console.log(params.slug);
 
 	if (params.slug === "new") {
 		return (
