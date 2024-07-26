@@ -4,10 +4,10 @@ import { Metadata } from "next";
 
 import { getSession } from "@/actions";
 import { Header } from "@/components/home/Header";
+import { Loading } from "@/components/loading/Loading";
 import { PopularTag } from "@/components/tag/PopularTag";
 import { ArticleList } from "@/components/home/ArticleList";
 import { ArticleHeader } from "@/components/home/ArticleHeader";
-import { Loading } from "@/components/loading/Loading";
 
 export const metadata: Metadata = {
 	title: "Home — Conduit",
@@ -15,8 +15,31 @@ export const metadata: Metadata = {
 		"Conduit is realworld social blogging site. it uses a custom API for all requests, including authentication. home page of conduit",
 };
 
-export default async function Home() {
+export default async function Home({
+	searchParams,
+}: {
+	searchParams: { [key: string]: string | number | undefined };
+}) {
 	const session = await getSession();
+	console.log(searchParams);
+
+	const page = searchParams["page"] ? (searchParams["page"] as number) : 0;
+	const offset = searchParams["offset"]
+		? (searchParams["offset"] as number)
+		: 0;
+	const tag = searchParams["tag"]
+		? (searchParams["tag"] as string)
+		: undefined;
+	const limit = searchParams["limit"]
+		? (searchParams["limit"] as number)
+		: undefined;
+	const author = searchParams["author"]
+		? (searchParams["author"] as string)
+		: undefined;
+	const favorited = searchParams["favorited"]
+		? (searchParams["favorited"] as string)
+		: undefined;
+
 	return (
 		<main>
 			<Header />
@@ -35,7 +58,15 @@ export default async function Home() {
 						]}
 					/>
 					<Suspense fallback={<Loading height={5} width={5} />}>
-						<ArticleList token={session.token as string} />
+						<ArticleList
+							tag={tag}
+							page={page}
+							limit={limit}
+							offset={offset}
+							author={author}
+							favorited={favorited}
+							token={session.token as string}
+						/>
 					</Suspense>
 				</div>
 				<Suspense fallback={<Loading height={5} width={5} />}>

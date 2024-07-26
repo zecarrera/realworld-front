@@ -2,20 +2,41 @@ import axios from "axios";
 
 import { Article } from "@/components/article/Article";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
-import { PaginationComponent } from "./PaginationComponent";
+import { PaginationComponent } from "@/components/home/PaginationComponent";
 
-export const ArticleList: React.FC<{ token: string }> = async ({ token }) => {
+type TArticleListProps = {
+	token: string;
+	page: number;
+	tag: string | undefined;
+	limit: number | undefined;
+	offset: number | undefined;
+	author: string | undefined;
+	favorited: string | undefined;
+};
+
+export const ArticleList: React.FC<TArticleListProps> = async ({
+	token,
+	tag,
+	page,
+	limit,
+	offset,
+	author,
+	favorited,
+}) => {
 	try {
-		const res = await axios.get(`http://localhost:4000/api/articles`, {
-			headers: {
-				Authorization: token ? `Token ${token}` : undefined,
-			},
-		});
+		const res = await axios.get(
+			`http://localhost:4000/api/articles?tag=${tag}&limit=${limit}&offset=${offset}&author=${author}&favorited=${favorited} `,
+			{
+				headers: {
+					Authorization: token ? `Token ${token}` : undefined,
+				},
+			}
+		);
 
 		const data = await res.data;
 		if (data.status === 200) {
-			const { articles } = await data.data;
-			console.log(articles);
+			const { articles, articlesCount } = await data.data;
+
 			return (
 				<>
 					<div className="my-5">
@@ -33,7 +54,10 @@ export const ArticleList: React.FC<{ token: string }> = async ({ token }) => {
 							/>
 						))}
 					</div>
-					<PaginationComponent />
+					<PaginationComponent
+						articlesCount={articlesCount}
+						page={page}
+					/>
 				</>
 			);
 		} else {
