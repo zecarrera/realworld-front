@@ -21,9 +21,8 @@ export default async function Home({
 	searchParams: { [key: string]: string | number | undefined };
 }) {
 	const session = await getSession();
-	console.log(searchParams);
 
-	const page = searchParams["page"] ? (searchParams["page"] as number) : 0;
+	const page = searchParams["page"] ? (searchParams["page"] as number) : 1;
 	const offset = searchParams["offset"]
 		? (searchParams["offset"] as number)
 		: 0;
@@ -32,7 +31,7 @@ export default async function Home({
 		: undefined;
 	const limit = searchParams["limit"]
 		? (searchParams["limit"] as number)
-		: undefined;
+		: 10;
 	const author = searchParams["author"]
 		? (searchParams["author"] as string)
 		: undefined;
@@ -49,7 +48,11 @@ export default async function Home({
 						choices={[
 							{
 								name: "Your Feed",
-								query: `follow=${session.username}`,
+								query: `follow=${
+									session.isLoggedIn
+										? session.username
+										: "unkown"
+								}`,
 							},
 							{
 								name: "Global Feed",

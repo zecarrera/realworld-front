@@ -1,5 +1,6 @@
+import { NextRequest, NextResponse } from "next/server"
+
 import axios from "axios";
-import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
     try {
@@ -49,12 +50,14 @@ export async function POST(req: Request) {
     }
 }
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
     try {
         const token: string = req.headers.get('authorization') as string;
 
+        const offset = req.nextUrl.searchParams.get('offset')
+        console.log(offset)
         const res = await axios
-            .get(`${process.env.BASE_URL}/articles`, {
+            .get(`${process.env.BASE_URL}/articles?offset=${offset}`, {
                 headers: {
                     'Authorization': token
                 }
