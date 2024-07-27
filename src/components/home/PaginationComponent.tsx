@@ -9,6 +9,7 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
 type TPaginationComponents = {
@@ -17,7 +18,6 @@ type TPaginationComponents = {
 };
 export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	page,
-	articlesCount,
 }) => {
 	const router = useRouter();
 
@@ -25,9 +25,11 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	let paginationStart: number = page > 10 ? page - 10 : 1;
 	let paginationElements: number[] = [];
 
+
 	for (let i = paginationStart; i <= paginationEnd; i++) {
 		paginationElements.push(i);
 	}
+	
 
 	const onPaginationClick = (page: number) => {
 		router.push(`/?page=${page}`);
@@ -49,7 +51,10 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 						<PaginationLink
 							href="#"
 							onClick={() => onPaginationClick(element)}
-							className="bg-transparent border p-1 rounded-none hover:bg-gray-300 focus:bg-green-custom focus:text-white"
+							className={cn(
+								"bg-transparent border p-1 rounded-none hover:bg-gray-300 ",
+								page == element && "bg-green-custom text-white"
+							)}
 						>
 							{element}
 						</PaginationLink>
