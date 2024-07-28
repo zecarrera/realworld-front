@@ -26,7 +26,6 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	const router = useRouter();
 	const path = useSearchParams();
 
-
 	let paginationLimit: number = Math.ceil(articlesCount / 10);
 
 	if (page > paginationLimit) {
@@ -37,7 +36,8 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	}
 
 	let paginationElements: number[] = [];
-	let paginationEnd: number = page > 10 ? page : paginationLimit;
+	let paginationEnd: number =
+		page > 10 ? page : paginationLimit < 10 ? paginationLimit : 10;
 	let paginationStart: number = page > 10 ? page - 9 : 1;
 
 	for (let i = paginationStart; i <= paginationEnd; i++) {
