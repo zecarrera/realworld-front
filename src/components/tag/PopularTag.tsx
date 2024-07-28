@@ -12,7 +12,7 @@ export const PopularTag = async () => {
 		if (data.status === 200) {
 			const { tags } = await data.data;
 			return (
-				<div className="bg-slate-100 shadow-custom rounded p-3 h-fit md:w-52">
+				<div className="bg-slate-100 shadow-custom rounded p-3 h-fit md:w-72">
 					<h1>Popular Tags</h1>
 					<TagList
 						isClickable

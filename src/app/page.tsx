@@ -51,7 +51,7 @@ export default async function Home({
 								query: `follow=${
 									session.isLoggedIn
 										? session.username
-										: "unkown"
+										: "unknown"
 								}`,
 							},
 							{

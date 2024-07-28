@@ -23,12 +23,12 @@ export const ArticleList: React.FC<TArticleListProps> = async ({
 	author,
 	favorited,
 }) => {
-	console.log("tag", tag);
-	console.log("page", page);
-	console.log("limit", limit);
-	console.log("offset", offset);
-	console.log("author", author);
-	console.log("favorited", favorited);
+	// console.log("tag", tag);
+	// console.log("page", page);
+	// console.log("limit", limit);
+	// console.log("offset", offset);
+	// console.log("author", author);
+	// console.log("favorited", favorited);
 	try {
 		const res = await axios.get(
 			`http://localhost:4000/api/articles?tag=${tag}&limit=${limit}&offset=${offset}&author=${author}&favorited=${favorited} `,
@@ -42,7 +42,7 @@ export const ArticleList: React.FC<TArticleListProps> = async ({
 		const data = await res.data;
 		if (data.status === 200) {
 			const { articles, articlesCount } = await data.data;
-			console.log(articles);
+			// console.log(articles);
 			return (
 				<>
 					<div className="my-5">
