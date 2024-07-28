@@ -37,7 +37,7 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	}
 
 	let paginationElements: number[] = [];
-	let paginationEnd: number = page > 10 ? page : 10;
+	let paginationEnd: number = page > 10 ? page : paginationLimit;
 	let paginationStart: number = page > 10 ? page - 9 : 1;
 
 	for (let i = paginationStart; i <= paginationEnd; i++) {

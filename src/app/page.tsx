@@ -22,7 +22,7 @@ export default async function Home({
 }) {
 	const session = await getSession();
 
-	let page = searchParams["page"] ? (searchParams["page"] as number) : 1;
+	const page = searchParams["page"] ? (searchParams["page"] as number) : 1;
 	const offset = searchParams["offset"]
 		? (searchParams["offset"] as number)
 		: 0;

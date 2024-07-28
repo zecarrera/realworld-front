@@ -16,7 +16,6 @@ type TArticleHeader = {
 export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
 	const path = usePathname();
 	const searchParams = useSearchParams();
-	console.log('searchparams',searchParams)
 	const search = searchParams.entries().next();
 	let query: string = search.value ? search.value.join("=") : "";
 

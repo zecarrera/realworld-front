@@ -46,7 +46,6 @@ export const ArticleList: React.FC<TArticleListProps> = async ({
 		const data = await res.data;
 		if (data.status === 200) {
 			const { articles, articlesCount } = await data.data;
-			// console.log(articles);
 			return (
 				<>
 					<div className="my-5">
