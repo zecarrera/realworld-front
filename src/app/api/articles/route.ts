@@ -54,10 +54,18 @@ export async function GET(req: NextRequest) {
     try {
         const token: string = req.headers.get('authorization') as string;
 
+        const tag = req.nextUrl.searchParams.get('tag')
+        const limit = req.nextUrl.searchParams.get('limit')
+        const author = req.nextUrl.searchParams.get('author')
         const offset = req.nextUrl.searchParams.get('offset')
-        console.log(offset)
+        const favorited = req.nextUrl.searchParams.get('favorited')
+
         const res = await axios
-            .get(`${process.env.BASE_URL}/articles?offset=${offset}`, {
+            .get(`${process.env.BASE_URL}/articles/?
+                limit=${limit}&offset=${offset}
+			    ${tag ? `&tag=${tag}` : ''}
+			    ${author ? `&author=${author}` : ''}
+			    ${favorited ? `&favorited=${favorited}` : ''}`, {
                 headers: {
                     'Authorization': token
                 }

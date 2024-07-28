@@ -13,7 +13,7 @@ type TTagProps = {
 export const Tag: React.FC<TTagProps> = ({ ele, className, isClickable }) => {
 	const route = useRouter();
 
-	let action = isClickable ? () => route.push(`?tag=${ele}`) : undefined;
+	let action = isClickable ? () => route.push(`/?tag=${ele}`) : undefined;
 
 	return (
 		<span

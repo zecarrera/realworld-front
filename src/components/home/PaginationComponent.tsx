@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import {
 	Pagination,
@@ -24,6 +24,8 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	articlesCount,
 }) => {
 	const router = useRouter();
+	const path = useSearchParams();
+
 
 	let paginationLimit: number = Math.ceil(articlesCount / 10);
 
