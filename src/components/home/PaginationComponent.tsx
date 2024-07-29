@@ -1,6 +1,10 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import {
+	ReadonlyURLSearchParams,
+	useRouter,
+	useSearchParams,
+} from "next/navigation";
 
 import {
 	Pagination,
@@ -12,6 +16,8 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
+import { setQuery } from "../tag/Tag";
 
 type TPaginationComponents = {
 	page: number;
@@ -24,16 +30,27 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	articlesCount,
 }) => {
 	const router = useRouter();
-	const path = useSearchParams();
+	const param = useSearchParams();
 
 	let paginationLimit: number = Math.ceil(articlesCount / 10);
 
-	if (page > paginationLimit) {
-		page = paginationLimit;
-		router.push(`/?page=${page}&offset=${(page - 1) * 10}`);
-	} else if (offset / 10 + 1 !== page) {
-		router.push(`/?page=${page}&offset=${(page - 1) * 10}`);
-	}
+	useEffect(() => {
+		if (page > paginationLimit) {
+			page = paginationLimit;
+			const result = setQuery(new URLSearchParams(param.toString()), [
+				{ key: "page", value: page },
+				{ key: "offset", value: (page - 1) * 10 },
+			]);
+
+			router.push(`/?${result}`);
+		} else if (offset / 10 + 1 !== page) {
+			const result = setQuery(new URLSearchParams(param.toString()), [
+				{ key: "page", value: page },
+				{ key: "offset", value: (page - 1) * 10 },
+			]);
+			router.push(`/?${result}`);
+		}
+	}, []);
 
 	let paginationElements: number[] = [];
 	let paginationEnd: number =
@@ -45,15 +62,26 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	}
 
 	const onPaginationClick = (page: number) => {
-		router.push(`/?page=${page}&offset=${(page - 1) * 10}`);
+		const result = setQuery(new URLSearchParams(param.toString()), [
+			{ key: "page", value: page },
+			{ key: "offset", value: (page - 1) * 10 },
+		]);
+		router.push(`/?${result}`);
 	};
 	const onNextClick = () => {
 		let nextPage = +page + 1;
-		if (nextPage <= paginationLimit) router.push(`/?page=${nextPage}`);
+		const result = setQuery(new URLSearchParams(param.toString()), [
+			{ key: "page", value: nextPage },
+		]);
+
+		if (nextPage <= paginationLimit) router.push(`/?${result}`);
 	};
 	const onPrevClick = () => {
 		let prevPage = +page - 1;
-		if (prevPage >= 1) router.push(`/?page=${prevPage}`);
+		const result = setQuery(new URLSearchParams(param.toString()), [
+			{ key: "page", value: prevPage },
+		]);
+		if (prevPage >= 1) router.push(`/?${result}`);
 	};
 
 	return (
