@@ -48,26 +48,34 @@ export const ArticleList: React.FC<TArticleListProps> = async ({
 			const { articles, articlesCount } = await data.data;
 			return (
 				<>
-					<div className="my-5">
-						{articles.map((article: any, i: number) => (
-							<Article
-								key={i}
-								slug={article.slug}
-								title={article.title}
-								date={article.updatedAt}
-								description={article.description}
-								username={article.author.username}
-								favorited={article.favorited}
-								favoritesCount={article.favoritesCount}
-								tagList={article.tagList}
+					{articlesCount > 0 ? (
+						<>
+							<div className="my-5">
+								{articles.map((article: any, i: number) => (
+									<Article
+										key={i}
+										slug={article.slug}
+										title={article.title}
+										date={article.updatedAt}
+										description={article.description}
+										username={article.author.username}
+										favorited={article.favorited}
+										favoritesCount={article.favoritesCount}
+										tagList={article.tagList}
+									/>
+								))}
+							</div>
+							<PaginationComponent
+								page={page}
+								offset={offset as number}
+								articlesCount={articlesCount}
 							/>
-						))}
-					</div>
-					<PaginationComponent
-						page={page}
-						offset={offset as number}
-						articlesCount={articlesCount}
-					/>
+						</>
+					) : (
+						<h1 className="w-fit mx-auto my-5">
+							No article found with given parameter
+						</h1>
+					)}
 				</>
 			);
 		} else {

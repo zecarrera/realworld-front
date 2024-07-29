@@ -23,9 +23,10 @@ export default async function Home({
 	const session = await getSession();
 
 	const page = searchParams["page"] ? (searchParams["page"] as number) : 1;
-	const offset = searchParams["offset"]
-		? (searchParams["offset"] as number)
-		: 0;
+	const offset =
+		searchParams["offset"] && (searchParams["offset"] as number) >= 0
+			? (searchParams["offset"] as number)
+			: 0;
 	const tag = searchParams["tag"]
 		? (searchParams["tag"] as string)
 		: undefined;

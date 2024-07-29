@@ -43,6 +43,12 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 			]);
 
 			router.push(`/?${result}`);
+		} else if (page < 1) {
+			const result = setQuery(new URLSearchParams(param.toString()), [
+				{ key: "page", value: 1 },
+				{ key: "offset", value: 0 },
+			]);
+			router.push(`/?${result}`);
 		} else if (offset / 10 + 1 !== page) {
 			const result = setQuery(new URLSearchParams(param.toString()), [
 				{ key: "page", value: page },
