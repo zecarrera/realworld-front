@@ -31,26 +31,27 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 }) => {
 	const router = useRouter();
 	const param = useSearchParams();
+	const params = new URLSearchParams(param.toString());
 
 	let paginationLimit: number = Math.ceil(articlesCount / 10);
 
 	useEffect(() => {
 		if (page > paginationLimit) {
 			page = paginationLimit;
-			const result = setQuery(new URLSearchParams(param.toString()), [
+			const result = setQuery(params, [
 				{ key: "page", value: page },
 				{ key: "offset", value: (page - 1) * 10 },
 			]);
 
 			router.push(`/?${result}`);
 		} else if (page < 1) {
-			const result = setQuery(new URLSearchParams(param.toString()), [
+			const result = setQuery(params, [
 				{ key: "page", value: 1 },
 				{ key: "offset", value: 0 },
 			]);
 			router.push(`/?${result}`);
 		} else if (offset / 10 + 1 !== page) {
-			const result = setQuery(new URLSearchParams(param.toString()), [
+			const result = setQuery(params, [
 				{ key: "page", value: page },
 				{ key: "offset", value: (page - 1) * 10 },
 			]);
@@ -68,7 +69,7 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	}
 
 	const onPaginationClick = (page: number) => {
-		const result = setQuery(new URLSearchParams(param.toString()), [
+		const result = setQuery(params, [
 			{ key: "page", value: page },
 			{ key: "offset", value: (page - 1) * 10 },
 		]);
@@ -76,17 +77,13 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	};
 	const onNextClick = () => {
 		let nextPage = +page + 1;
-		const result = setQuery(new URLSearchParams(param.toString()), [
-			{ key: "page", value: nextPage },
-		]);
+		const result = setQuery(params, [{ key: "page", value: nextPage }]);
 
 		if (nextPage <= paginationLimit) router.push(`/?${result}`);
 	};
 	const onPrevClick = () => {
 		let prevPage = +page - 1;
-		const result = setQuery(new URLSearchParams(param.toString()), [
-			{ key: "page", value: prevPage },
-		]);
+		const result = setQuery(params, [{ key: "page", value: prevPage }]);
 		if (prevPage >= 1) router.push(`/?${result}`);
 	};
 
@@ -96,7 +93,10 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 				<PaginationItem>
 					<PaginationPrevious
 						onClick={onPrevClick}
-						className="cursor-pointer bg-transparent border p-1 hover:bg-gray-300 focus:bg-green-custom focus:text-white rounded-none rounded-l"
+						className={cn(
+							"cursor-pointer bg-transparent border p-1 hover:bg-gray-300 focus:bg-green-custom focus:text-white rounded-none rounded-l",
+							page == 1 && "hidden"
+						)}
 					/>
 				</PaginationItem>
 				<PaginationItem>
@@ -133,7 +133,10 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 				<PaginationItem>
 					<PaginationNext
 						onClick={onNextClick}
-						className="cursor-pointer bg-transparent border p-1 hover:bg-gray-300 focus:bg-green-custom focus:text-white rounded-none rounded-r"
+						className={cn(
+							"cursor-pointer bg-transparent border p-1 hover:bg-gray-300 focus:bg-green-custom focus:text-white rounded-none rounded-r",
+							page == paginationLimit && "hidden"
+						)}
 					/>
 				</PaginationItem>
 			</PaginationContent>

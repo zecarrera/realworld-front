@@ -24,12 +24,11 @@ export const setQuery = (
 export const Tag: React.FC<TTagProps> = ({ ele, className, isClickable }) => {
 	const route = useRouter();
 	const param = useSearchParams();
+	const params = new URLSearchParams(param.toString());
 
 	let action = isClickable
 		? () => {
-				const result = setQuery(new URLSearchParams(param.toString()), [
-					{ key: "tag", value: ele },
-				]);
+				const result = setQuery(params, [{ key: "tag", value: ele }]);
 				route.push(`/?${result}`);
 		  }
 		: undefined;
