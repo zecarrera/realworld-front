@@ -5,8 +5,9 @@ import { FormattedErrors } from "@/components/error/FormattedErrors";
 import { PaginationComponent } from "@/components/home/PaginationComponent";
 
 type TArticleListProps = {
-	token: string;
+	feed: any;
 	page: number;
+	token: string;
 	tag: string | undefined;
 	limit: number | undefined;
 	offset: number | undefined;
@@ -17,31 +18,35 @@ type TArticleListProps = {
 export const ArticleList: React.FC<TArticleListProps> = async ({
 	tag,
 	page,
+	feed,
 	limit,
 	token,
 	offset,
 	author,
 	favorited,
 }) => {
-	//console.log("tag", tag);
-	// console.log("page", page);
-	// console.log("limit", limit);
-	// console.log("offset", offset);
-	// console.log("author", author);
-	// console.log("favorited", favorited);
 	try {
-		const res = await axios.get(
-			`http://localhost:4000/api/articles/?
+		const res =
+			feed == true
+				? await axios.get("http://localhost:4000/api/articles/feed", {
+						headers: {
+							Authorization: token ? `Token ${token}` : undefined,
+						},
+				  })
+				: await axios.get(
+						`http://localhost:4000/api/articles/?
 			limit=${limit}&offset=${offset}
 			${tag ? `&tag=${tag}` : ""}
 			${author ? `&author=${author}` : ""}
 			${favorited ? `&favorited=${favorited}` : ""}`,
-			{
-				headers: {
-					Authorization: token ? `Token ${token}` : undefined,
-				},
-			}
-		);
+						{
+							headers: {
+								Authorization: token
+									? `Token ${token}`
+									: undefined,
+							},
+						}
+				  );
 
 		const data = await res.data;
 		if (data.status === 200) {

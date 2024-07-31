@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Metadata } from "next";
 
 import { getSession } from "@/actions";
+import { getParams } from "@/lib/get-params";
 import { Header } from "@/components/home/Header";
 import { Loading } from "@/components/loading/Loading";
 import { PopularTag } from "@/components/tag/PopularTag";
@@ -22,49 +23,34 @@ export default async function Home({
 }) {
 	const session = await getSession();
 
-	const page = searchParams["page"] ? (searchParams["page"] as number) : 1;
-	const offset =
-		searchParams["offset"] && (searchParams["offset"] as number) >= 0
-			? (searchParams["offset"] as number)
-			: 0;
-	const tag = searchParams["tag"]
-		? (searchParams["tag"] as string)
-		: undefined;
-	const limit = searchParams["limit"]
-		? (searchParams["limit"] as number)
-		: 10;
-	const author = searchParams["author"]
-		? (searchParams["author"] as string)
-		: undefined;
-	const favorited = searchParams["favorited"]
-		? (searchParams["favorited"] as string)
-		: undefined;
+	const { page, offset, tag, limit, author, favorited, feed } =
+		getParams(searchParams);
+
+	const articleHeaderElements = [
+		{
+			name: "Global Feed",
+			query: ``,
+		},
+	];
+
+	if (session.isLoggedIn) {
+		articleHeaderElements.unshift({
+			name: "Your Feed",
+			query: `feed=1`,
+		});
+	}
 
 	return (
 		<main>
 			<Header />
 			<div className="min-w-full flex flex-col gap-5 md:flex-row  py-2 px-4 md:px-10 lg:px-14 mt-10">
 				<div className="flex-1">
-					<ArticleHeader
-						choices={[
-							{
-								name: "Your Feed",
-								query: `follow=${
-									session.isLoggedIn
-										? session.username
-										: "unknown"
-								}`,
-							},
-							{
-								name: "Global Feed",
-								query: ``,
-							},
-						]}
-					/>
+					<ArticleHeader choices={articleHeaderElements} />
 					<Suspense fallback={<Loading height={5} width={5} />}>
 						<ArticleList
 							tag={tag}
 							page={page}
+							feed={feed}
 							limit={limit}
 							offset={offset}
 							author={author}

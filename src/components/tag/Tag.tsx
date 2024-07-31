@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
@@ -23,13 +23,14 @@ export const setQuery = (
 
 export const Tag: React.FC<TTagProps> = ({ ele, className, isClickable }) => {
 	const route = useRouter();
+	const path = usePathname();
 	const param = useSearchParams();
 	const params = new URLSearchParams(param.toString());
 
 	let action = isClickable
 		? () => {
 				const result = setQuery(params, [{ key: "tag", value: ele }]);
-				route.push(`/?${result}`);
+				route.push(`${path}?${result}`);
 		  }
 		: undefined;
 

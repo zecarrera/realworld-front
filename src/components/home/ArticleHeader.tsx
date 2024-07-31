@@ -17,7 +17,13 @@ export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
 	const path = usePathname();
 	const searchParams = useSearchParams();
 	const search = searchParams.entries().next();
-	let query: string = search.value ? search.value.join("=") : "";
+	let query: string = path.startsWith("/profile")
+		? search.value
+			? search.value.join("=")
+			: `author=${path.split("/")[2]}`
+		: search.value
+		? search.value.join("=")
+		: "";
 
 	return (
 		<div>
@@ -26,7 +32,6 @@ export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
 					<Link
 						className={cn(
 							"opacity-85 pb-2 hover:opacity-100 border-b border-b-white",
-
 							query === choice.query &&
 								" border-b-green-custom text-green-custom"
 						)}

@@ -63,13 +63,16 @@ export async function GET(req: NextRequest) {
         const res = await axios
             .get(`${process.env.BASE_URL}/articles/?
                 limit=${limit}&offset=${offset}
-			    ${tag ? `&tag=${tag}` : ''}
 			    ${author ? `&author=${author}` : ''}
-			    ${favorited ? `&favorited=${favorited}` : ''}`, {
-                headers: {
-                    'Authorization': token
-                }
-            })
+			    ${favorited ? `&favorited=${favorited}` : ''}
+			    ${tag ? `&tag=${tag}` : ''}`
+                , {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+
+
 
         return NextResponse.json({ data: await res.data, status: res.status })
 
