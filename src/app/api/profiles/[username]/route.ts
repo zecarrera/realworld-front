@@ -18,7 +18,7 @@ export async function GET(req: Request, ctx: { params: { username: string } }) {
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        //console.error('API_PROFILE_GET', error)
+        console.error('API_PROFILE_GET', error)
         if (
             error.response.status === 401 ||
             error.response.status === 422

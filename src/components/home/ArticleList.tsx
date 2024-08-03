@@ -25,14 +25,24 @@ export const ArticleList: React.FC<TArticleListProps> = async ({
 	author,
 	favorited,
 }) => {
+	
 	try {
 		const res =
 			feed == true
-				? await axios.get("http://localhost:4000/api/articles/feed", {
-						headers: {
-							Authorization: token ? `Token ${token}` : undefined,
-						},
-				  })
+				? await axios.get(
+						`http://localhost:4000/api/articles/feed/?
+			limit=${limit}&offset=${offset}
+			${tag ? `&tag=${tag}` : ""}
+			${author ? `&author=${author}` : ""}
+			${favorited ? `&favorited=${favorited}` : ""}`,
+						{
+							headers: {
+								Authorization: token
+									? `Token ${token}`
+									: undefined,
+							},
+						}
+				  )
 				: await axios.get(
 						`http://localhost:4000/api/articles/?
 			limit=${limit}&offset=${offset}

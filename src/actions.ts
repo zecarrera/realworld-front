@@ -2,9 +2,9 @@
 
 import { cookies } from "next/headers"
 import { revalidatePath } from "next/cache"
-import { permanentRedirect, redirect } from "next/navigation"
+import { redirect } from "next/navigation"
 
-import axios, { AxiosResponse } from "axios"
+import axios from "axios"
 import { getIronSession } from "iron-session"
 
 import { ISessionData, defaultSession, sessionOptions } from "@/lib/config"

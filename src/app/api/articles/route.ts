@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ data: await res.data, status: res.status })
 
     } catch (error: any) {
-        console.error('API_ARTICLE_POST', error)
+        console.error('API_ARTICLE_POST', error.response.data)
         if (
             error.response.status === 401 ||
             error.response.status === 422
@@ -60,19 +60,26 @@ export async function GET(req: NextRequest) {
         const offset = req.nextUrl.searchParams.get('offset')
         const favorited = req.nextUrl.searchParams.get('favorited')
 
+        let url: string = `${process.env.BASE_URL}/articles/?`;
+
+        limit ?
+            url += `limit=${+limit}` : url += `limit=${10}`;
+        tag ?
+            url += `&tag=${tag}` : null;
+        author ?
+            url += `&author=${author}` : null;
+        offset ?
+            url += `&offset=${+offset}` : url += `&offset=${0}`;
+        favorited ?
+            url += `&favorited=${favorited}` : null;
+
         const res = await axios
-            .get(`${process.env.BASE_URL}/articles/?
-                limit=${limit}&offset=${offset}
-			    ${author ? `&author=${author}` : ''}
-			    ${favorited ? `&favorited=${favorited}` : ''}
-			    ${tag ? `&tag=${tag}` : ''}`
+            .get(url
                 , {
                     headers: {
                         'Authorization': token
                     }
                 })
-
-
 
         return NextResponse.json({ data: await res.data, status: res.status })
 

@@ -5,6 +5,7 @@ import NavBar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import { sourceSansPro } from "@/lib/font-loader";
 import { ToasterProvider } from "@/providers/toast-providers";
+import { getSession } from "@/actions";
 
 export const metadata: Metadata = {
 	title: {

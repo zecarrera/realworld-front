@@ -5,6 +5,7 @@ import { Settings } from "lucide-react";
 import FollowButton from "../article/singleArticle/FollowButton";
 import { IronSession } from "iron-session";
 import { ISessionData } from "@/lib/config";
+import { cn } from "@/lib/utils";
 
 export type TProfileHeaderProps = {
 	profile: {
@@ -22,10 +23,13 @@ const ProfileHeader: React.FC<TProfileHeaderProps> = ({ profile, session }) => {
 			<div className="w-full md:w-4/5 lg:w-3/5 mx-auto flex flex-col align-middle items-center justify-center gap-2">
 				<div className="relative w-24 h-24 rounded-full">
 					<Image
-						src={profile.image}
+						src={profile.image ? profile.image : ""}
 						alt={profile.username}
 						fill
-						className="rounded-full object-fit"
+						className={cn(
+							"rounded-full object-fit",
+							!profile.image && "object-cover border"
+						)}
 					/>
 				</div>
 				<h1 className=" font-bold text-2xl w-fit h-fit">

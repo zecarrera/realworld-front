@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 
 import axios from "axios";
 import { getSession } from "@/actions";
+import { redirect } from "next/navigation";
 
 export async function GET(req: Request) {
     try {
@@ -17,15 +18,17 @@ export async function GET(req: Request) {
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        console.error('API_USER_GET', error)
+        console.error('API_USER_GET', error.response.status)
         if (error.response.status === 422
         ) {
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
         }
 
         if (error.response.status === 401) {
-            return NextResponse.json({ data: { "Error": [error.response.data.message] }, status: error.response.status })
-
+            const session = await getSession();
+            session.destroy();
+            await session.save()
+            redirect('/')
         }
         return new NextResponse('Error', { status: 500, statusText: 'Internal server error' })
     }
