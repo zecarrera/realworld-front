@@ -39,7 +39,6 @@ export const Article: React.FC<TArticleProps> = ({
 				<FavoriteArticleButton
 					slug={slug}
 					haveText={false}
-					username={username}
 					favorite={favorited}
 					favoritesCount={favoritesCount}
 					refreshUrl="/"
