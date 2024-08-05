@@ -72,8 +72,9 @@ export const NewArticle: React.FC<TEditorProps> = ({
 				.put(
 					`/api/articles/${slug}`,
 					{
-						...values,
-						tagList: state.tagList,
+						body: values.body,
+						title: values.title,
+						description: values.description,
 					},
 					{
 						headers: {
