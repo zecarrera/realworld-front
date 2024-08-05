@@ -43,7 +43,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ data: await res.data, status: res.status })
 
     } catch (error: any) {
-        //console.error('API_REGISTER_POST', error)
+        console.error('API_REGISTER_POST', error)
         if (
             error.response.status === 403 ||
             error.response.status === 422

@@ -11,7 +11,7 @@ export async function GET(_req: Request) {
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        //console.error('API_TAGS_GET', error)
+        console.error('API_TAGS_GET', error)
         if (error.response.status === 422) {
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
         }

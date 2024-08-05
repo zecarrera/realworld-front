@@ -85,11 +85,13 @@ export async function GET(req: NextRequest) {
 
     } catch (error: any) {
         console.error('API_ARTICLE_GET', error)
-        if (
-            error.response.status === 401 ||
-            error.response.status === 422
-        ) {
+        if (error.response.status === 422) {
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
+        }
+
+        if (error.response.status === 401) {
+            return NextResponse.json({ data: error.response.data.errors ? error.response.data.errors : { '': [error.response.data.message] }, status: error.response.status })
+
         }
 
         return new NextResponse('Internal server error', { status: 500, statusText: 'Internal server error' })

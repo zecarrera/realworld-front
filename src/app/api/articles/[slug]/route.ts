@@ -19,7 +19,7 @@ export async function GET(req: Request, ctx: { params: { slug: string } }) {
 
 
     } catch (error: any) {
-        //console.error('API_SINGLE_ARTICLE_GET', error.response.data)
+        console.error('API_SINGLE_ARTICLE_GET', error)
         if (
             error.response.status === 401 ||
             error.response.status === 422 ||
@@ -54,7 +54,7 @@ export async function PUT(req: Request, ctx: { params: { slug: string } }) {
         return NextResponse.json({ data: await res.data, status: res.status })
 
     } catch (error: any) {
-        console.error('API_ARTICLE_PUT', error.response.data.errors)
+        console.error('API_ARTICLE_PUT', error)
         if (
             error.response.status === 401 ||
             error.response.status === 422

@@ -18,7 +18,7 @@ export async function GET(req: Request) {
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        console.error('API_USER_GET', error.response.status)
+        console.error('API_USER_GET', error)
         if (error.response.status === 422
         ) {
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
