@@ -23,9 +23,9 @@ export default async function ProfilePage(props: TProfilePageProps) {
 		props.searchParams
 	);
 
-	// if (!author && !favorited) {
-	// 	author = props.params.username;
-	// }
+	if (!author && !favorited) {
+		author = props.params.username;
+	}
 
 	try {
 		const res = await axios.get(

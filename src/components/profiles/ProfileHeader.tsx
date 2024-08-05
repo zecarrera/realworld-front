@@ -2,10 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Settings } from "lucide-react";
-import FollowButton from "../article/singleArticle/FollowButton";
 import { IronSession } from "iron-session";
-import { ISessionData } from "@/lib/config";
+
 import { cn } from "@/lib/utils";
+import { ISessionData } from "@/lib/config";
+import FollowButton from "@/components/article/singleArticle/FollowButton";
 
 export type TProfileHeaderProps = {
 	profile: {

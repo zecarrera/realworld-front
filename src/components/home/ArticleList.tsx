@@ -25,7 +25,6 @@ export const ArticleList: React.FC<TArticleListProps> = async ({
 	author,
 	favorited,
 }) => {
-	
 	try {
 		const res =
 			feed == true
