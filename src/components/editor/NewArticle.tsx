@@ -230,22 +230,44 @@ export const NewArticle: React.FC<TEditorProps> = ({
 										{...field}
 										onKeyUp={(e) => {
 											if (e.key === "Enter") {
-												state.tagList.push(
-													field.value?.trim() as string
-												);
-												form.reset({
-													title: form.getValues(
-														"title"
-													),
-													description:
-														form.getValues(
-															"description"
+												if (
+													!state.tagList.find(
+														(tag) =>
+															tag ===
+															(field.value?.trim() as string)
+													)
+												) {
+													state.tagList.push(
+														field.value?.trim() as string
+													);
+													form.reset({
+														title: form.getValues(
+															"title"
 														),
-													body: form.getValues(
-														"body"
-													),
-													tagList: "",
-												});
+														description:
+															form.getValues(
+																"description"
+															),
+														body: form.getValues(
+															"body"
+														),
+														tagList: "",
+													});
+												} else {
+													form.reset({
+														title: form.getValues(
+															"title"
+														),
+														description:
+															form.getValues(
+																"description"
+															),
+														body: form.getValues(
+															"body"
+														),
+														tagList: "",
+													});
+												}
 											}
 										}}
 										className="px-6 py-1 min-h-5 h-10 overflow-hidden resize-none text-xl rounded-s-md text-gray-400 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
@@ -258,7 +280,7 @@ export const NewArticle: React.FC<TEditorProps> = ({
 							</FormItem>
 						)}
 					/>
-					<div className="flex">
+					<div className="flex flex-wrap gap-1.5">
 						{state.tagList.map((ele, index) => (
 							<span
 								className="bg-gray-400 p-1 mr-1 rounded-full flex w-fit h-fit gap-[2px] text-xs justify-center items-center"

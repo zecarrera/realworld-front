@@ -54,7 +54,7 @@ export async function PUT(req: Request, ctx: { params: { slug: string } }) {
         return NextResponse.json({ data: await res.data, status: res.status })
 
     } catch (error: any) {
-        console.error('API_ARTICLE_PUT', error)
+        console.error('API_ARTICLE_PUT', error.response.data.errors)
         if (
             error.response.status === 401 ||
             error.response.status === 422
