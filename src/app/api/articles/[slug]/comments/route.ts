@@ -2,8 +2,8 @@ import axios from "axios";
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request, ctx: { params: { slug: string } }) {
+    const token: string = req.headers.get('authorization') as string;
     try {
-        const token: string = req.headers.get('authorization') as string;
         const body = await req.json();
 
         if (!body.body)
@@ -40,8 +40,8 @@ export async function POST(req: Request, ctx: { params: { slug: string } }) {
 
 
 export async function GET(req: Request, ctx: { params: { slug: string } }) {
+    const token: string = req.headers.get('authorization') as string;
     try {
-        const token: string = req.headers.get('authorization') as string;
 
         const res = await axios
             .get(`${process.env.BASE_URL}/articles/${ctx.params.slug}/comments`, {

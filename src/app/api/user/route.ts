@@ -5,10 +5,8 @@ import { getSession } from "@/actions";
 import { redirect } from "next/navigation";
 
 export async function GET(req: Request) {
+    const token: string = req.headers.get('authorization') as string;
     try {
-        const token: string = req.headers.get('authorization') as string;
-
-
         const res = await axios
             .get(`${process.env.BASE_URL}/user`, {
                 headers: {
@@ -36,8 +34,8 @@ export async function GET(req: Request) {
 
 
 export async function PUT(req: Request) {
+    const token: string = req.headers.get('authorization') as string;
     try {
-        const token: string = req.headers.get('authorization') as string;
         const body = await req.json();
 
         const res = await axios

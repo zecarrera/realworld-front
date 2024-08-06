@@ -2,11 +2,9 @@ import axios from "axios";
 import { NextResponse } from "next/server"
 
 export async function GET(req: Request, ctx: { params: { username: string } }) {
+    const token: string = req.headers.get('authorization') as string;
+
     try {
-        const token: string = req.headers.get('authorization') as string;
-
-
-
         const res = await axios
             .get(`${process.env.BASE_URL}/profiles/${ctx.params.username}`, {
                 headers: {

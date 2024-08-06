@@ -3,10 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 export async function GET(req: NextRequest) {
+    const token: string = req.headers.get('authorization') as string;
     try {
-
-        const token: string = req.headers.get('authorization') as string;
-
         const tag = req.nextUrl.searchParams.get('tag')
         const limit = req.nextUrl.searchParams.get('limit')
         const author = req.nextUrl.searchParams.get('author')

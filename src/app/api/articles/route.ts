@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server"
 import axios from "axios";
 
 export async function POST(req: Request) {
+    const token: string = req.headers.get('authorization') as string;
     try {
-        const token: string = req.headers.get('authorization') as string;
         const body = await req.json();
 
         if (!body.title)
@@ -51,9 +51,9 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: NextRequest) {
-    try {
-        const token: string = req.headers.get('authorization') as string;
+    const token: string = req.headers.get('authorization') as string;
 
+    try {
         const tag = req.nextUrl.searchParams.get('tag')
         const limit = req.nextUrl.searchParams.get('limit')
         const author = req.nextUrl.searchParams.get('author')

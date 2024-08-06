@@ -37,7 +37,6 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	useEffect(() => {
 		if (limit > paginationLimit) {
 			setLimit(paginationLimit);
-
 			const result = setQuery(params, [
 				{ key: "page", value: limit },
 				{ key: "offset", value: (limit - 1) * 10 },
