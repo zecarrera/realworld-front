@@ -18,8 +18,6 @@ export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
 	const searchParams = useSearchParams();
 	const search = searchParams.entries().next();
 
-	console.log("search", search.value);
-
 	let query: string = path.startsWith("/profile")
 		? search.value &&
 		  search.value[0] != "page" &&
@@ -32,7 +30,6 @@ export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
 		? search.value.join("=")
 		: "";
 
-	console.log("query", query);
 
 	return (
 		<div>
