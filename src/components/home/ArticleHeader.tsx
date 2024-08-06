@@ -18,13 +18,21 @@ export const ArticleHeader: React.FC<TArticleHeader> = ({ choices }) => {
 	const searchParams = useSearchParams();
 	const search = searchParams.entries().next();
 
+	console.log("search", search.value);
+
 	let query: string = path.startsWith("/profile")
-		? search.value
+		? search.value &&
+		  search.value[0] != "page" &&
+		  search.value[0] != "offset"
 			? search.value.join("=")
 			: `author=${path.split("/")[2]}`
-		: search.value
+		: search.value &&
+		  search.value[0] != "page" &&
+		  search.value[0] != "offset"
 		? search.value.join("=")
 		: "";
+
+	console.log("query", query);
 
 	return (
 		<div>

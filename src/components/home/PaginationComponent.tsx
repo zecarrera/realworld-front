@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -26,6 +26,7 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	offset,
 	articlesCount,
 }) => {
+	const [limit, setLimit] = useState(page);
 	const path = usePathname();
 	const router = useRouter();
 	const param = useSearchParams();
@@ -34,24 +35,25 @@ export const PaginationComponent: React.FC<TPaginationComponents> = ({
 	let paginationLimit: number = Math.ceil(articlesCount / 10);
 
 	useEffect(() => {
-		if (page > paginationLimit) {
-			page = paginationLimit;
+		if (limit > paginationLimit) {
+			setLimit(paginationLimit);
+
 			const result = setQuery(params, [
-				{ key: "page", value: page },
-				{ key: "offset", value: (page - 1) * 10 },
+				{ key: "page", value: limit },
+				{ key: "offset", value: (limit - 1) * 10 },
 			]);
 
 			router.push(`${path}?${result}`);
-		} else if (page < 1) {
+		} else if (limit < 1) {
 			const result = setQuery(params, [
 				{ key: "page", value: 1 },
 				{ key: "offset", value: 0 },
 			]);
 			router.push(`${path}?${result}`);
-		} else if (offset / 10 + 1 !== page) {
+		} else if (offset / 10 + 1 !== limit) {
 			const result = setQuery(params, [
-				{ key: "page", value: page },
-				{ key: "offset", value: (page - 1) * 10 },
+				{ key: "page", value: limit },
+				{ key: "offset", value: (limit - 1) * 10 },
 			]);
 			router.push(`${path}?${result}`);
 		}
