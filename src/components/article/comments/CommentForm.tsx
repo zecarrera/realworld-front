@@ -62,7 +62,7 @@ export const CommentForm: React.FC<TCommentProps> = ({
 
 		await axios
 			.post(
-				`/api/articles/${slug}/comments`,
+				`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/articles/${slug}/comments`,
 				{
 					...values,
 				},

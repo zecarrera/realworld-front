@@ -1,7 +1,7 @@
 "use client";
 
-import { deleteComment } from "@/actions";
 import { Trash2 } from "lucide-react";
+import { deleteComment } from "@/actions";
 
 type TDeleteButtonProps = {
 	id: number;

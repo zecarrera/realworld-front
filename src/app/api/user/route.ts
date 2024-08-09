@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server"
 
-import axios from "axios";
-import { getSession } from "@/actions";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+import axios from "axios";
+import { getSession } from "@/actions";
+
 export async function GET(req: Request) {
+    const cookieStore = cookies()
     const token: string = req.headers.get('authorization') as string;
     try {
         const res = await axios
@@ -16,17 +19,16 @@ export async function GET(req: Request) {
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        console.error('API_USER_GET', error)
+        console.error('API_USER_GET', error.response.status)
         if (error.response.status === 422
         ) {
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
         }
 
-        if (error.response.status === 401) {
-            const session = await getSession();
-            session.destroy();
-            await session.save()
-            redirect('/')
+        if (error.response.status == 401) {
+            console.log('env', process.env.COOKIE_NAME)
+            cookieStore.delete(process.env.COOKIE_NAME as string);
+            redirect('/login')
         }
         return new NextResponse('Error', { status: 500, statusText: 'Internal server error' })
     }

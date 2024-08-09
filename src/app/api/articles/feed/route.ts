@@ -30,7 +30,6 @@ export async function GET(req: NextRequest) {
                     'Authorization': token
                 }
             })
-
         return NextResponse.json({ data: await res.data, status: res.status })
 
     } catch (error: any) {

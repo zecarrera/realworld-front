@@ -1,7 +1,8 @@
+import axios from "axios";
+
 import { getSession } from "@/actions";
 import { NewArticle } from "@/components/editor/NewArticle";
 import { FormattedErrors } from "@/components/error/FormattedErrors";
-import axios from "axios";
 
 type TEditorPageProps = {
 	params: {
@@ -21,7 +22,7 @@ const EditorPage: React.FC<TEditorPageProps> = async ({ params }) => {
 	} else {
 		try {
 			const res = await axios.get(
-				`http://localhost:4000/api/articles/${params.slug}`,
+				`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/articles/${params.slug}`,
 				{
 					headers: {
 						Authorization: `Token ${session.token}`,

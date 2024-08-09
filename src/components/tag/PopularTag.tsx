@@ -5,7 +5,9 @@ import { FormattedErrors } from "@/components/error/FormattedErrors";
 
 export const PopularTag = async () => {
 	try {
-		const res = await axios.get(`http://localhost:4000/api/tags`);
+		const res = await axios.get(
+			`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/tags`
+		);
 
 		const data = await res.data;
 

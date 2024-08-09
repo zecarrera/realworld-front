@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import {  useState } from "react";
 
 import { z } from "zod";
 import axios from "axios";
@@ -70,7 +70,7 @@ export const NewArticle: React.FC<TEditorProps> = ({
 		if (slug) {
 			await axios
 				.put(
-					`/api/articles/${slug}`,
+					`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/articles/${slug}`,
 					{
 						body: values.body,
 						title: values.title,
@@ -83,6 +83,7 @@ export const NewArticle: React.FC<TEditorProps> = ({
 					}
 				)
 				.then((res) => {
+					console.log("res", res);
 					if (res.data.status === 200) {
 						const { article } = res.data.data;
 						setState((prevState) => ({
@@ -114,7 +115,7 @@ export const NewArticle: React.FC<TEditorProps> = ({
 		} else {
 			await axios
 				.post(
-					"/api/articles",
+					`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/articles`,
 					{
 						...values,
 						tagList: state.tagList,
@@ -156,6 +157,7 @@ export const NewArticle: React.FC<TEditorProps> = ({
 				});
 		}
 	}
+
 
 	return (
 		<>

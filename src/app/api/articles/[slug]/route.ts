@@ -35,21 +35,18 @@ export async function PUT(req: Request, ctx: { params: { slug: string } }) {
     const token: string = req.headers.get('authorization') as string;
     try {
         const body = await req.json();
-
         const res = await axios
             .put(`${process.env.BASE_URL}/articles/${ctx.params.slug}`, {
                 article: {
+                    body: body.body,
                     title: body.title,
                     description: body.description,
-                    body: body.description,
-                    tagList: body.tagList
                 }
             }, {
                 headers: {
                     'Authorization': token
                 }
             })
-
         return NextResponse.json({ data: await res.data, status: res.status })
 
     } catch (error: any) {

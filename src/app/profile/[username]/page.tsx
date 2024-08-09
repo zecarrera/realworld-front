@@ -29,7 +29,7 @@ export default async function ProfilePage(props: TProfilePageProps) {
 
 	try {
 		const res = await axios.get(
-			`http://localhost:4000/api/profiles/${props.params.username}`,
+			`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/profiles/${props.params.username}`,
 			{
 				headers: {
 					Authorization: session.token

@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ data: await res.data, status: res.status })
 
     } catch (error: any) {
-        console.error('API_ARTICLE_POST', error.response.data)
+        console.error('API_ARTICLE_POST', error)
         if (
             error.response.status === 401 ||
             error.response.status === 422

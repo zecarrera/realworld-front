@@ -17,7 +17,7 @@ export const AvatarImg: React.FC<TAvatarImageProps> = async ({
 
 	try {
 		const res = await axios.get(
-			`http://localhost:4000/api/profiles/${username}`,
+			`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/profiles/${username}`,
 			{
 				headers: {
 					Authorization: session.token

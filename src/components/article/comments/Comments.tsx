@@ -11,7 +11,7 @@ type TCommentsProps = {
 export const Comments: React.FC<TCommentsProps> = async ({ slug, token }) => {
 	try {
 		const res = await axios.get(
-			`http://localhost:4000/api/articles/${slug}/comments`,
+			`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/articles/${slug}/comments`,
 			{
 				headers: {
 					Authorization: `Token ${token}`,
