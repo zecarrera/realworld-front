@@ -60,7 +60,7 @@ export const Article: React.FC<TArticleProps> = ({
 					tagList={tagList}
 					isClickable={true}
 					innerClassName="cursor-pointer"
-					className="px-0 py-0 md:px-0 lg:px-0 min-w-fit bg-black"
+					className="flex-1 px-0 py-0 md:px-0 lg:px-0 min-w-fit bg-black"
 				/>
 			</div>
 			<Separator className="group-last/item:invisible" />
