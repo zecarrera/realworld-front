@@ -1,6 +1,6 @@
 "use client";
 
-import {  useState } from "react";
+import { useState } from "react";
 
 import { z } from "zod";
 import axios from "axios";
@@ -158,7 +158,6 @@ export const NewArticle: React.FC<TEditorProps> = ({
 		}
 	}
 
-
 	return (
 		<>
 			{state.isError && (
@@ -221,91 +220,97 @@ export const NewArticle: React.FC<TEditorProps> = ({
 							</FormItem>
 						)}
 					/>
-					<FormField
-						control={form.control}
-						name="tagList"
-						disabled={state.loading}
-						render={({ field }) => (
-							<FormItem>
-								<FormControl>
-									<Textarea
-										placeholder="Enter tags"
-										{...field}
-										onKeyUp={(e) => {
-											if (e.key === "Enter") {
-												if (
-													!state.tagList.find(
-														(tag) =>
-															tag ===
-															(field.value?.trim() as string)
-													)
-												) {
-													state.tagList.push(
-														field.value?.trim() as string
-													);
-													form.reset({
-														title: form.getValues(
-															"title"
-														),
-														description:
-															form.getValues(
-																"description"
+					{!slug && (
+						<FormField
+							control={form.control}
+							name="tagList"
+							disabled={state.loading}
+							render={({ field }) => (
+								<FormItem>
+									<FormControl>
+										<Textarea
+											placeholder="Enter tags"
+											{...field}
+											onKeyUp={(e) => {
+												if (e.key === "Enter") {
+													if (
+														!state.tagList.find(
+															(tag) =>
+																tag ===
+																(field.value?.trim() as string)
+														) &&
+														(field.value?.trim() as string) !==
+															""
+													) {
+														state.tagList.push(
+															field.value?.trim() as string
+														);
+														form.reset({
+															title: form.getValues(
+																"title"
 															),
-														body: form.getValues(
-															"body"
-														),
-														tagList: "",
-													});
-												} else {
-													form.reset({
-														title: form.getValues(
-															"title"
-														),
-														description:
-															form.getValues(
-																"description"
+															description:
+																form.getValues(
+																	"description"
+																),
+															body: form.getValues(
+																"body"
 															),
-														body: form.getValues(
-															"body"
-														),
-														tagList: "",
-													});
+															tagList: "",
+														});
+													} else {
+														form.reset({
+															title: form.getValues(
+																"title"
+															),
+															description:
+																form.getValues(
+																	"description"
+																),
+															body: form.getValues(
+																"body"
+															),
+															tagList: "",
+														});
+													}
 												}
-											}
+											}}
+											className="px-6 py-1 min-h-5 h-10 overflow-hidden resize-none text-xl rounded-s-md text-gray-400 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
+										/>
+									</FormControl>
+									<FormMessage />
+									<FormDescription>
+										hint: after each tag press enter key
+									</FormDescription>
+								</FormItem>
+							)}
+						/>
+					)}
+					{!slug && (
+						<div className="flex flex-wrap gap-1.5">
+							{state.tagList.map((ele, index) => (
+								<span
+									className="bg-gray-400 p-1 mr-1 rounded-full flex w-fit h-fit gap-[2px] text-xs justify-center items-center"
+									key={index}
+								>
+									<X
+										height={13}
+										width={13}
+										className="cursor-pointer"
+										onClick={() => {
+											setState((prevState) => ({
+												...prevState,
+												tagList: state.tagList.filter(
+													(e) => e !== ele
+												),
+											}));
 										}}
-										className="px-6 py-1 min-h-5 h-10 overflow-hidden resize-none text-xl rounded-s-md text-gray-400 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
 									/>
-								</FormControl>
-								<FormMessage />
-								<FormDescription>
-									hint: after each tag press enter key
-								</FormDescription>
-							</FormItem>
-						)}
-					/>
-					<div className="flex flex-wrap gap-1.5">
-						{state.tagList.map((ele, index) => (
-							<span
-								className="bg-gray-400 p-1 mr-1 rounded-full flex w-fit h-fit gap-[2px] text-xs justify-center items-center"
-								key={index}
-							>
-								<X
-									height={13}
-									width={13}
-									className="cursor-pointer"
-									onClick={() => {
-										setState((prevState) => ({
-											...prevState,
-											tagList: state.tagList.filter(
-												(e) => e !== ele
-											),
-										}));
-									}}
-								/>
-								{ele}
-							</span>
-						))}
-					</div>
+									{ele}
+								</span>
+							))}
+						</div>
+					)}
 					<div className="flex justify-end">
 						<Button
 							type="submit"
