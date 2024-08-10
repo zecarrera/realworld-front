@@ -59,7 +59,7 @@ const NavBar = async () => {
 				href: `/profile/${user.username}`,
 				name: session.username as string,
 				icon: (
-					<Avatar>
+					<Avatar className=" hidden md:block">
 						<AvatarImage
 							//TODO: actual image
 							src={user.image}

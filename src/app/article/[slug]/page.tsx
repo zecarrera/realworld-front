@@ -52,7 +52,10 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 					<p className="py-5 px-4 md:px-10 lg:px-14 text-lg text-justify">
 						{article.body}
 					</p>
-					<TagList tagList={article.tagList} />
+					<TagList
+						tagList={article.tagList}
+						className="py-5 px-4 md:px-10 lg:px-14"
+					/>
 					<div className="py-2 px-4 md:px-10 lg:px-14">
 						<Separator />
 					</div>
