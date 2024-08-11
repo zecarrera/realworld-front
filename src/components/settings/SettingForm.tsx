@@ -65,7 +65,7 @@ export const SettingForm: React.FC<TSettingFormProps> = ({
 		setState((prevState) => ({ ...prevState, loading: true }));
 		await axios
 			.put(
-				"/api/user",
+				`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/user`,
 				{
 					...values,
 				},

@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server"
 import axios from "axios";
 
 export async function POST(req: Request) {
+    const token: string = req.headers.get('authorization') as string;
     try {
-        const token: string = req.headers.get('authorization') as string;
         const body = await req.json();
 
         if (!body.title)
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ data: await res.data, status: res.status })
 
     } catch (error: any) {
-        console.error('API_ARTICLE_POST', error.response.data)
+        console.error('API_ARTICLE_POST', error)
         if (
             error.response.status === 401 ||
             error.response.status === 422
@@ -51,9 +51,9 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: NextRequest) {
-    try {
-        const token: string = req.headers.get('authorization') as string;
+    const token: string = req.headers.get('authorization') as string;
 
+    try {
         const tag = req.nextUrl.searchParams.get('tag')
         const limit = req.nextUrl.searchParams.get('limit')
         const author = req.nextUrl.searchParams.get('author')
@@ -85,11 +85,13 @@ export async function GET(req: NextRequest) {
 
     } catch (error: any) {
         console.error('API_ARTICLE_GET', error)
-        if (
-            error.response.status === 401 ||
-            error.response.status === 422
-        ) {
+        if (error.response.status === 422) {
             return NextResponse.json({ data: error.response.data.errors, status: error.response.status })
+        }
+
+        if (error.response.status === 401) {
+            return NextResponse.json({ data: error.response.data.errors ? error.response.data.errors : { '': [error.response.data.message] }, status: error.response.status })
+
         }
 
         return new NextResponse('Internal server error', { status: 500, statusText: 'Internal server error' })

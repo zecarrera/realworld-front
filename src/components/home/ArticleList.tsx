@@ -25,12 +25,12 @@ export const ArticleList: React.FC<TArticleListProps> = async ({
 	author,
 	favorited,
 }) => {
-	
+
 	try {
 		const res =
-			feed == true
+			feed == 1
 				? await axios.get(
-						`http://localhost:4000/api/articles/feed/?
+						`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/articles/feed/?
 			limit=${limit}&offset=${offset}
 			${tag ? `&tag=${tag}` : ""}
 			${author ? `&author=${author}` : ""}
@@ -44,7 +44,7 @@ export const ArticleList: React.FC<TArticleListProps> = async ({
 						}
 				  )
 				: await axios.get(
-						`http://localhost:4000/api/articles/?
+						`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/articles/?
 			limit=${limit}&offset=${offset}
 			${tag ? `&tag=${tag}` : ""}
 			${author ? `&author=${author}` : ""}

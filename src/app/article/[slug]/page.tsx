@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Suspense } from "react";
 
+import Link from "next/link";
 import { getSession } from "@/actions";
 import { TagList } from "@/components/tag/TagList";
 import { Separator } from "@/components/ui/separator";
@@ -11,7 +12,6 @@ import { AvatarImg } from "@/components/profiles/avatar/AvatarImage";
 import { CommentForm } from "@/components/article/comments/CommentForm";
 import SingleArticleHeader from "@/components/article/singleArticle/SingleArticleHeader";
 import { SingleArticleActivity } from "@/components/article/singleArticle/SingleArticleActivity";
-import Link from "next/link";
 
 type TSingleArticleProps = {
 	params: {
@@ -23,7 +23,7 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 
 	try {
 		const res = await axios.get(
-			`http://localhost:4000/api/articles/${params.slug}`,
+			`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/articles/${params.slug}`,
 			{
 				headers: {
 					Authorization: session.token
@@ -52,7 +52,10 @@ const SingleArticle: React.FC<TSingleArticleProps> = async ({ params }) => {
 					<p className="py-5 px-4 md:px-10 lg:px-14 text-lg text-justify">
 						{article.body}
 					</p>
-					<TagList tagList={article.tagList} />
+					<TagList
+						tagList={article.tagList}
+						className="py-5 px-4 md:px-10 lg:px-14"
+					/>
 					<div className="py-2 px-4 md:px-10 lg:px-14">
 						<Separator />
 					</div>

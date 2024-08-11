@@ -44,11 +44,14 @@ const NavBar = async () => {
 
 	try {
 		if (session.isLoggedIn) {
-			const res = await axios.get("http://localhost:4000/api/user", {
-				headers: {
-					Authorization: `Token ${session.token}`,
-				},
-			});
+			const res = await axios.get(
+				`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/user`,
+				{
+					headers: {
+						Authorization: `Token ${session.token}`,
+					},
+				}
+			);
 			const data = await res.data;
 
 			const { user } = await data.data;
@@ -56,7 +59,7 @@ const NavBar = async () => {
 				href: `/profile/${user.username}`,
 				name: session.username as string,
 				icon: (
-					<Avatar>
+					<Avatar className=" hidden md:block">
 						<AvatarImage
 							//TODO: actual image
 							src={user.image}

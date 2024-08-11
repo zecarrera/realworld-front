@@ -10,7 +10,7 @@ const SettingsPage = async () => {
 	const session = await getSession();
 
 	try {
-		const res = await axios.get("http://localhost:4000/api/user", {
+		const res = await axios.get(`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/user`, {
 			headers: {
 				Authorization: `Token ${session.token}`,
 			},

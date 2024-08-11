@@ -17,7 +17,7 @@ export const TagList: React.FC<TTagListProps> = ({
 	return (
 		<div
 			className={cn(
-				"flex flex-wrap gap-2 items-center min-w-full py-7 px-4 md:px-10 lg:px-14",
+				"flex flex-wrap gap-1 md:gap-2 items-center py-7",
 				className
 			)}
 		>

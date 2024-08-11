@@ -52,7 +52,7 @@ export const Article: React.FC<TArticleProps> = ({
 					{description}
 				</h2>
 			</Link>
-			<div className="flex justify-between items-center p-0 m-0 ">
+			<div className="flex justify-between items-center p-0 m-0">
 				<Link href={`/article/${slug}`}>
 					<span className="text-sm text-zinc-400">Read more...</span>
 				</Link>
@@ -60,7 +60,7 @@ export const Article: React.FC<TArticleProps> = ({
 					tagList={tagList}
 					isClickable={true}
 					innerClassName="cursor-pointer"
-					className="px-0 py-0 md:px-0 lg:px-0 min-w-fit bg-black"
+					className="py-1"
 				/>
 			</div>
 			<Separator className="group-last/item:invisible" />

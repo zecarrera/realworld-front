@@ -26,6 +26,7 @@ export const SingleArticleActivity: React.FC<TSingleArticleActivity> = async ({
 	isCurrentUser,
 	favoritesCount,
 }) => {
+
 	return (
 		<div
 			className={cn(
