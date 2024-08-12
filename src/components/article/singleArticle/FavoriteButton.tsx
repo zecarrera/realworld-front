@@ -29,7 +29,7 @@ const FavoriteArticleButton: React.FC<TFavoriteArticleButtonProps> = ({
 					: async () => await favoriteArticle(slug, refreshUrl)
 			}
 			className={cn(
-				"m-0 px-2 py-1 h-fit flex gap-1 bg-transparent  border border-green-custom text-green-custom underline-offset-0 hover:no-underline hover:bg-green-custom hover:text-white",
+				"m-0 px-2 py-1 h-fit text-xs md:text-sm flex gap-1 bg-transparent  border border-green-custom text-green-custom underline-offset-0 hover:no-underline hover:bg-green-custom hover:text-white",
 				favorite &&
 					"bg-green-custom text-white hover:bg-transparent hover:text-green-custom"
 			)}

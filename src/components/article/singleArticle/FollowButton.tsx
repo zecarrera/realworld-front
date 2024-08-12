@@ -22,7 +22,7 @@ const FollowButton: React.FC<TFollowButtonProps> = ({
 					? async () => await unFollow(username)
 					: async () => await follow(username)
 			}
-			className="m-0 px-2 py-1 h-fit flex gap-1 bg-slate-300 opacity-75 border border-black-custom underline-offset-0 hover:no-underline  hover:opacity-100"
+			className="m-0 px-2 py-1 h-fit text-xs md:text-sm flex gap-1 bg-slate-300 opacity-75 border border-black-custom underline-offset-0 hover:no-underline  hover:opacity-100"
 		>
 			<Plus height={15} width={15} />
 			<span>
