@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { format } from "date-fns";
+import { Github } from "lucide-react";
 
 const Footer = () => {
 	return (
@@ -20,7 +21,17 @@ const Footer = () => {
 				>
 					Thinkster
 				</Link>
-				. Code licensed under MIT.
+				. Code licensed under MIT. Developed by{" "}
+				<span className={` text-green-custom font-bold mr-3`}>
+					Salahadin Dinsafa{" "}
+					<Link href="https://github.com/salahadin-dinsafa/realworld-front" >
+						<Github
+							height={15}
+							width={15}
+							className="inline ml-2 mb-1 text-black-custom fill-black-custom "
+						/>
+					</Link>
+				</span>
 			</span>
 		</footer>
 	);
