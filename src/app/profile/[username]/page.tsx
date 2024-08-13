@@ -51,7 +51,7 @@ export default async function ProfilePage(props: TProfilePageProps) {
 							choices={[
 								{
 									name: "My Articles",
-									query: ``,
+									query: `author=${props.params.username}`,
 								},
 								{
 									name: "Favorited Posts",
