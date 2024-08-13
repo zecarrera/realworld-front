@@ -17,16 +17,16 @@ To get the frontend running locally:
 - `npm run dev` to start the local server
 
 - add .env file at root directory
-- then add the following variable
+- Then add the following variable
 
-   # COOKIE_NAME=%name of cookie%
-   # COOKIE_PASSWORD=%password you want for cookie%
+   ### COOKIE_NAME=%name of cookie%
+   ### COOKIE_PASSWORD=%password you want for cookie%
 
   you can change base url in respect of your backend application
-   # BASE_URL=https://api.realworld.io/api
+   ### BASE_URL=https://api.realworld.io/api
 
   your frontend application url NEXT_PUBLIC_RELATIVE_PATH example if your running on localhost
-   # NEXT_PUBLIC_RELATIVE_PATH=http://localhost:3000/api
+   ### NEXT_PUBLIC_RELATIVE_PATH=http://localhost:3000/api
 
 
 
