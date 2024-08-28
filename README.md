@@ -21,9 +21,9 @@ To get the frontend running locally:
 
   - COOKIE_NAME=%name of cookie%
   - COOKIE_PASSWORD=%password you want for cookie%
-       ++note COOKIE_PASSWORD length must be at least 32 character as it is described here 
+  - ++note COOKIE_PASSWORD length must be at least 32 character as it is described here 
 https://www.npmjs.com/package/iron-session
-  you can change base url in respect of your backend application
+ - you can change base url in respect of your backend application
   - BASE_URL=https://api.realworld.io/api
 
   your frontend application url NEXT_PUBLIC_RELATIVE_PATH example if your running on localhost
