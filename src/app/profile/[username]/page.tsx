@@ -23,10 +23,6 @@ export default async function ProfilePage(props: TProfilePageProps) {
 		props.searchParams
 	);
 
-	if (!author && !favorited) {
-		author = props.params.username;
-	}
-
 	try {
 		const res = await axios.get(
 			`${process.env.NEXT_PUBLIC_RELATIVE_PATH}/profiles/${props.params.username}`,
@@ -51,11 +47,17 @@ export default async function ProfilePage(props: TProfilePageProps) {
 							choices={[
 								{
 									name: "My Articles",
-									query: `author=${props.params.username}`,
+									query: `author=${
+										author ? author : props.params.username
+									}`,
 								},
 								{
 									name: "Favorited Posts",
-									query: `favorited=${props.params.username}`,
+									query: `favorited=${
+										favorited
+											? favorited
+											: props.params.username
+									}`,
 								},
 							]}
 						/>
