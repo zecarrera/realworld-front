@@ -1,5 +1,5 @@
 
-# ![Next.js 14]
+# [Next.js 14]
 
 > ### Next.js 14 codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) spec and API.
 
@@ -21,8 +21,9 @@ To get the frontend running locally:
 
   - COOKIE_NAME=%name of cookie%
   - COOKIE_PASSWORD=%password you want for cookie%
-
-  you can change base url in respect of your backend application
+  - ++note COOKIE_PASSWORD length must be at least 32 character as it is described here 
+https://www.npmjs.com/package/iron-session
+ - you can change base url in respect of your backend application
   - BASE_URL=https://api.realworld.io/api
 
   your frontend application url NEXT_PUBLIC_RELATIVE_PATH example if your running on localhost
