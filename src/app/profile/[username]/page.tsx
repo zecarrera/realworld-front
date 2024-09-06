@@ -68,7 +68,7 @@ export default async function ProfilePage(props: TProfilePageProps) {
 								feed={feed}
 								limit={limit}
 								offset={offset}
-								author={author}
+								author={author ? author : props.params.username}
 								favorited={favorited}
 								token={session.token as string}
 							/>
