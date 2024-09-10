@@ -26,7 +26,6 @@ export async function GET(req: Request) {
         }
 
         if (error.response.status == 401) {
-            console.log('env', process.env.COOKIE_NAME)
             cookieStore.delete(process.env.COOKIE_NAME as string);
             redirect('/login')
         }
@@ -67,7 +66,7 @@ export async function PUT(req: Request) {
 
         return NextResponse.json({ data: await res.data, status: res.status })
     } catch (error: any) {
-        console.error('API_USER_PUT', error)
+        console.error('API_USER_PUT', error.response.data)
         if (
             error.response.status === 401 ||
             error.response.status === 403 ||

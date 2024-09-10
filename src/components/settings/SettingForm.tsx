@@ -57,7 +57,7 @@ export const SettingForm: React.FC<TSettingFormProps> = ({
 			username,
 			email,
 			bio,
-			password: "",
+			password: undefined,
 		},
 	});
 
