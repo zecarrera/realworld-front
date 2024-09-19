@@ -45,9 +45,10 @@ export const Article: React.FC<TArticleProps> = ({
 				/>
 			</div>
 			<Link href={`/article/${slug}`}>
-				<h1 className="text-2xl font-bold">{title}</h1>
+				<h1 className="text-2xl font-bold" data-testid="article-title">{title}</h1>
 				<h2
 					className={`text-zinc-400 ${sourceSansProExtraLight} font-extralight`}
+					data-testid="article-description"
 				>
 					{description}
 				</h2>

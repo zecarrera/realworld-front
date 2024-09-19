@@ -1,0 +1,779 @@
+{
+  "uuid": "3584669f-137b-4e2c-9941-b64e6848e756",
+  "lastMigration": 32,
+  "name": "RealWorldApi",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 9001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "220be668-31f8-4e71-90eb-80192b314cac",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "articles/",
+      "responses": [
+        {
+          "uuid": "d3a6c03f-dea9-4abe-8764-ac54e9df8a15",
+          "body": "{\n  \"articles\": [\n    {\n      \"slug\": \"exploratory-testing-aa0ab8d3-171c-4d32-af1d-252e12255aa3\",\n      \"title\": \"Exploratory testing is one of the most powerful techniques\",\n      \"description\": \"In reprehenderit esse id ut quas cupiditate error sit. Eum nostrum libero facilis quis error consectetur. Totam porro ut similique aut sint enim amet enim. Harum quo est repudiandae doloribus.\",\n      \"tagList\": [\n        \"test\",\n        \"agile\",\n        \"ui\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:27.566Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 145,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"Ill-override-the-digital-ADP-alarm-that-should-microchip-the-USB-firewall!-aa0ab8d3-171c-4d32-af1d-252e12255aa3\",\n      \"title\": \"Test automation can help you speed up your delivery\",\n      \"description\": \"Repellat illo sunt cum. Maiores et iure. Accusantium eum quo ullam minus architecto aut nulla rerum. Non quis nisi omnis eos dolores quia. Beatae nihil hic ut necessitatibus id fugiat.\",\n      \"tagList\": [\n        \"necessitatibus\",\n        \"consequatur\",\n        \"excepturi\",\n        \"reiciendis\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:24.023Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 45,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    }\n    ],\n  \"articlesCount\": 2\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "limit",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "offset",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "tag",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "author",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "favorited",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "5d9f2887-dc44-4248-b130-2f8c3a1ed7e2",
+          "body": "{\n  \"articles\": [\n    {\n      \"slug\": \"mockoon\",\n      \"title\": \"Using mockoon can help speed up your UI tests\",\n      \"description\": \"In this article we describe the benefits of using mockoon\",\n      \"tagList\": [\n        \"mock\",\n        \"testing\",\n        \"automation\",\n        \"ui\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:27.566Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 1,\n      \"author\": {\n        \"username\": \"Jose Carrera\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    }\n  ],\n  \"articlesCount\": 1\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Author == jose.carrera",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "author",
+              "value": "jose.carrera",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "limit",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "offset",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cbd61fd1-a5a8-43de-9d24-7eafd0b89554",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "tags",
+      "responses": [
+        {
+          "uuid": "76dd8f0f-dafe-4664-bf0a-aa0b7a59e541",
+          "body": "{\n  \"tags\": [\n    \"test\",\n    \"automation\",\n    \"selenium\",\n    \"cypress\",\n    \"playwright\",\n    \"api\"\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ca2c70e2-add0-4ef8-870c-7ec284ad74b5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "profiles/Eunice%20Abubakar",
+      "responses": [
+        {
+          "uuid": "11817415-0165-427c-8dee-5d1fc14d7888",
+          "body": "{\n  \"profile\": {\n    \"username\": \"Eunice Abubakar\",\n    \"bio\": null,\n    \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n    \"following\": false\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "1ec65691-e83e-4173-a922-014c69968b78",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "articles/works",
+      "responses": [
+        {
+          "uuid": "d60af183-ed85-4eba-855c-0496641e4f27",
+          "body": "{\n  \"articles\": [\n    {\n      \"slug\": \"Ill-override-the-digital-ADP-alarm-that-should-microchip-the-USB-firewall!-aa0ab8d3-171c-4d32-af1d-252e12255aa3\",\n      \"title\": \"Ill override the digital ADP alarm, that should microchip the USB firewall!\",\n      \"description\": \"In reprehenderit esse id ut quas cupiditate error sit. Eum nostrum libero facilis quis error consectetur. Totam porro ut similique aut sint enim amet enim. Harum quo est repudiandae doloribus.\",\n      \"tagList\": [\n        \"ipsum\",\n        \"voluptatem\",\n        \"fugit\",\n        \"magnam\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:27.566Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 145,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"Ill-program-the-back-end-THX-matrix-that-should-interface-the-HDD-panel!-892c73f2-83c4-47ca-8020-b858885f3acf\",\n      \"title\": \"Ill program the back-end THX matrix, that should interface the HDD panel!\",\n      \"description\": \"Repellat illo sunt cum. Maiores et iure. Accusantium eum quo ullam minus architecto aut nulla rerum. Non quis nisi omnis eos dolores quia. Beatae nihil hic ut necessitatibus id fugiat.\",\n      \"tagList\": [\n        \"necessitatibus\",\n        \"consequatur\",\n        \"excepturi\",\n        \"reiciendis\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:24.023Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 45,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"Ill-generate-the-virtual-SQL-protocol-that-should-bus-the-AI-hard-drive!-08699efb-707c-40a9-987e-692c6dcb48fc\",\n      \"title\": \"Ill generate the virtual SQL protocol, that should bus the AI hard drive!\",\n      \"description\": \"Eveniet quae minus vero praesentium eos fugit explicabo et. Libero at ea ut sapiente et nesciunt odio similique vel. Libero aliquam tempore corporis eveniet dolorum nihil maiores veritatis. Harum modi sint officia.\",\n      \"tagList\": [\n        \"et\",\n        \"numquam\",\n        \"deserunt\",\n        \"quia\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:20.550Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 21,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"We-need-to-calculate-the-wireless-TCP-circuit!-56c39333-a395-4fe6-a601-5043174644b0\",\n      \"title\": \"We need to calculate the wireless TCP circuit!\",\n      \"description\": \"Ut quidem et. Quo assumenda et cumque molestias atque sint qui modi. Velit qui dolore possimus totam qui blanditiis. Vel quia consequatur aliquid corrupti qui libero.\",\n      \"tagList\": [\n        \"sapiente\",\n        \"fugiat\",\n        \"in\",\n        \"asperiores\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:17.097Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 16,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"Ill-reboot-the-online-COM-interface-that-should-system-the-THX-protocol!-ba3b4a58-0597-4a43-b226-c77c2a828b2a\",\n      \"title\": \"Ill reboot the online COM interface, that should system the THX protocol!\",\n      \"description\": \"Labore corporis blanditiis dolorum nemo nam praesentium alias sequi inventore. Cupiditate rerum enim sint quis. Eum occaecati provident labore veniam deserunt vero sed soluta repellat. Cum sapiente pariatur et ea a recusandae et optio. Sequi doloribus reiciendis corrupti quidem accusamus est nesciunt. Excepturi accusamus consequatur est sed maiores excepturi autem.\",\n      \"tagList\": [\n        \"esse\",\n        \"voluptate\",\n        \"error\",\n        \"nihil\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:13.628Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 6,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"If-we-index-the-card-we-can-get-to-the-SMS-hard-drive-through-the-bluetooth-AGP-bus!-8c335317-e334-4f04-897e-5a1b528348d4\",\n      \"title\": \"If we index the card, we can get to the SMS hard drive through the bluetooth AGP bus!\",\n      \"description\": \"Minima soluta sed sed et optio explicabo at distinctio repudiandae. Magnam deleniti a ea. Non velit accusamus veniam qui. Necessitatibus velit ad aut officiis in officiis quasi. Sunt nulla dolores voluptatem esse magnam ut.\",\n      \"tagList\": [\n        \"doloribus\",\n        \"sequi\",\n        \"magnam\",\n        \"enim\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:10.180Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 10,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"The-JBOD-port-is-down-program-the-wireless-array-so-we-can-input-the-PCI-program!-e66f6df9-c22b-40b0-8b38-eebb71a98538\",\n      \"title\": \"The JBOD port is down, program the wireless array so we can input the PCI program!\",\n      \"description\": \"Tempore explicabo laborum laboriosam officia velit aspernatur dolor cupiditate aperiam. Ab aliquid est. Veniam eius vel id rerum quisquam illo voluptates id.\",\n      \"tagList\": [\n        \"laborum\",\n        \"nihil\",\n        \"tenetur\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:06.635Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 3,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"copying-the-system-wont-do-anything-we-need-to-calculate-the-virtual-SSL-circuit!-1264b077-b0e8-4f84-b92f-9fefc23e674d\",\n      \"title\": \"copying the system wont do anything, we need to calculate the virtual SSL circuit!\",\n      \"description\": \"Eveniet qui aperiam et. Rem incidunt sapiente architecto earum consectetur officia. Assumenda voluptatem sed aperiam sed temporibus sunt in. Totam molestiae aspernatur quia non rem facilis expedita harum veritatis. Culpa ipsam quo dolor.\",\n      \"tagList\": [\n        \"commodi\",\n        \"dicta\",\n        \"ducimus\",\n        \"labore\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:03.179Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 2,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"calculating-the-driver-wont-do-anything-we-need-to-generate-the-optical-SMTP-feed!-bd8b269b-f6e4-4558-9fdd-4877a1f205d1\",\n      \"title\": \"calculating the driver wont do anything, we need to generate the optical SMTP feed!\",\n      \"description\": \"Quia sit architecto itaque voluptas aliquam. Rem veritatis qui quasi sint velit dolorem maxime voluptatem. Sit aut laboriosam aspernatur dicta non consequatur qui recusandae. Dignissimos voluptatem labore praesentium.\",\n      \"tagList\": [\n        \"est\",\n        \"esse\",\n        \"voluptate\",\n        \"consequuntur\"\n      ],\n      \"createdAt\": \"2024-08-21T14:29:59.706Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 1,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n    {\n      \"slug\": \"If-we-reboot-the-port-we-can-get-to-the-RSS-application-through-the-1080p-SQL-microchip!-41f266d0-d701-4a3f-adbe-1fc5927a3ce3\",\n      \"title\": \"If we reboot the port, we can get to the RSS application through the 1080p SQL microchip!\",\n      \"description\": \"Voluptatem ipsa delectus corporis necessitatibus et et et eos debitis. Doloremque enim dolorum. Exercitationem ratione pariatur ut temporibus et est distinctio. Doloremque exercitationem dolores excepturi praesentium ut esse ut dolorum laboriosam. Itaque non aut quos nesciunt voluptatem voluptatem cupiditate.\",\n      \"tagList\": [\n        \"ipsum\",\n        \"sed\",\n        \"in\",\n        \"quia\"\n      ],\n      \"createdAt\": \"2024-08-21T14:29:56.256Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 3,\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    }\n  ],\n  \"articlesCount\": 220\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "03e3afba-bd73-4243-b9ac-b4834346a192",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "users/login",
+      "responses": [
+        {
+          "uuid": "fdc8cf29-4bf2-45b1-9817-692171e06c02",
+          "body": "{\n  \"user\": {\n    \"email\": \"jose.carrera@conduit.com\",\n    \"username\": \"jose.carrera\",\n    \"bio\": null,\n    \"image\": \"https://api.realworld.io/images/smiley-cyrus.jpeg\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0Mzk1fSwiaWF0IjoxNzI2Njc3MDk5LCJleHAiOjE3MzE4NjEwOTl9.gN7R0NXxHzOj5uZuhiF-KeE2mA02Yq_FrLiv7O3jHnE\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "03aa5e54-00e5-4a14-995f-db1142af9c15",
+          "body": "Error",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Invalid login details",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "user.email",
+              "value": "invalid@conduit.com",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ecc9fb9b-e657-482b-908e-5c63577008bc",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "user",
+      "responses": [
+        {
+          "uuid": "8163ba68-b217-4ba5-8f3e-d0f0f302437b",
+          "body": "{\n  \"user\": {\n    \"id\": 4395,\n    \"email\": \"jose.carrera@conduit.com\",\n    \"username\": \"jose.carrera\",\n    \"bio\": null,\n    \"image\": \"https://api.realworld.io/images/smiley-cyrus.jpeg\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0Mzk1fSwiaWF0IjoxNzI2Njc3MDgyLCJleHAiOjE3MzE4NjEwODJ9.jG7RbR9ZN4XsCV3J46p79OBQdYLGOkB8FiDAcKLYeaQ\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "content-length",
+              "value": "316"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cb155054-8278-4373-af6f-39fc990c5996",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "articles/feed/",
+      "responses": [
+        {
+          "uuid": "5221fee5-043b-43b5-8a14-e52bb7dcf2b9",
+          "body": "{\"articles\":[\n   {\n      \"slug\": \"mockoon\",\n      \"title\": \"Using mockoon can help speed up your UI tests\",\n      \"description\": \"In this article we describe the benefits of using mockoon\",\n      \"tagList\": [\n        \"mock\",\n        \"testing\",\n        \"automation\",\n        \"ui\"\n      ],\n      \"createdAt\": \"2024-08-21T14:30:27.566Z\",\n      \"favorited\": false,\n      \"favoritesCount\": 1,\n      \"author\": {\n        \"username\": \"Jose Carrera\",\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    },\n  ],\"articlesCount\":1}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=60"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "cf-ray",
+              "value": "8c52c30c0f5821cc-MAN"
+            },
+            {
+              "key": "connection",
+              "value": "close"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Wed, 18 Sep 2024 16:37:40 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"21-/3zoiGPNflLbkDGmxSQjxjQsAo8\""
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1726677460&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=n0o53Zzd%2BVkGkanfty%2BU9iV27Z925tYHnpTOTyYGssc%3D\"}]}"
+            },
+            {
+              "key": "reporting-endpoints",
+              "value": "heroku-nel=https://nel.heroku.com/reports?ts=1726677460&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=n0o53Zzd%2BVkGkanfty%2BU9iV27Z925tYHnpTOTyYGssc%3D"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "via",
+              "value": "1.1 vegur"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-length",
+              "value": "33"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "1862c54a-f8d3-4dc8-a19b-fa9ce2861cd6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "profiles/jose.carrera",
+      "responses": [
+        {
+          "uuid": "8115dbbe-93ae-454a-9979-22b2a200dcde",
+          "body": "{\n  \"profile\": {\n    \"username\": \"jose.carrera\",\n    \"bio\": null,\n    \"image\": \"https://api.realworld.io/images/smiley-cyrus.jpeg\",\n    \"following\": false\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=33"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "cf-ray",
+              "value": "8c5417ed7e31cc92-MAN"
+            },
+            {
+              "key": "connection",
+              "value": "close"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Wed, 18 Sep 2024 20:30:22 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"80-6dKeGsEFx9tiu1lUIBMmC4MbB7I\""
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1726691422&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=76czy3Sw68l6C6kyLTL7u0S0s7H%2BzMOJgPguqLrl8ck%3D\"}]}"
+            },
+            {
+              "key": "reporting-endpoints",
+              "value": "heroku-nel=https://nel.heroku.com/reports?ts=1726691422&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=76czy3Sw68l6C6kyLTL7u0S0s7H%2BzMOJgPguqLrl8ck%3D"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "via",
+              "value": "1.1 vegur"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-length",
+              "value": "128"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "1c7f7583-f237-4980-9b98-42e1a26074b1",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "profiles/Jose%20Carrera",
+      "responses": [
+        {
+          "uuid": "b13384a3-e620-40db-9ddd-16a37b5e02ee",
+          "body": "{\n  \"profile\": {\n    \"username\": \"jose.carrera\",\n    \"bio\": null,\n    \"image\": \"https://api.realworld.io/images/smiley-cyrus.jpeg\",\n    \"following\": false\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=33"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "cf-ray",
+              "value": "8c5417ed7e31cc92-MAN"
+            },
+            {
+              "key": "connection",
+              "value": "close"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Wed, 18 Sep 2024 20:30:22 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"80-6dKeGsEFx9tiu1lUIBMmC4MbB7I\""
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1726691422&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=76czy3Sw68l6C6kyLTL7u0S0s7H%2BzMOJgPguqLrl8ck%3D\"}]}"
+            },
+            {
+              "key": "reporting-endpoints",
+              "value": "heroku-nel=https://nel.heroku.com/reports?ts=1726691422&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=76czy3Sw68l6C6kyLTL7u0S0s7H%2BzMOJgPguqLrl8ck%3D"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "via",
+              "value": "1.1 vegur"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-length",
+              "value": "128"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "0884b6d2-7348-42cb-9804-ff10f2e6267e",
+      "type": "http",
+      "documentation": "Get Article By Slug",
+      "method": "get",
+      "endpoint": "articles/exploratory-testing-aa0ab8d3-171c-4d32-af1d-252e12255aa3",
+      "responses": [
+        {
+          "uuid": "c12ce3ef-2ea8-4097-8fc4-291fde4fa735",
+          "body": "{\n  \"article\": {\n    \"slug\": \"Ill-override-the-digital-ADP-alarm-that-should-microchip-the-USB-firewall!-aa0ab8d3-171c-4d32-af1d-252e12255aa3\",\n    \"title\": \"Ill override the digital ADP alarm, that should microchip the USB firewall!\",\n    \"description\": \"In reprehenderit esse id ut quas cupiditate error sit. Eum nostrum libero facilis quis error consectetur. Totam porro ut similique aut sint enim amet enim. Harum quo est repudiandae doloribus.\",\n    \"body\": \"Est aut quis soluta accusantium debitis vel.\\\\nQuisquam aliquid ex corporis velit. Nesciunt numquam velit nihil qui quia eius. Ipsa labore numquam aut quidem quia.\\\\nMinus ut et recusandae sed dolorem eveniet.\\\\nEst vero sit et omnis et explicabo exercitationem qui quasi.\\\\nQui maxime iusto alias sint nihil quas.\\\\nModi quaerat voluptatem reiciendis reiciendis vero. Voluptatum tempora voluptas est odio iure odio dolorem.\\\\nVoluptatum est deleniti explicabo explicabo harum provident quis molestiae. Quis nesciunt ut est eos.\\\\nQui reiciendis doloribus.\\\\nEst quidem ullam reprehenderit.\\\\nEst omnis eligendi quis quis quo eum officiis asperiores quis. Voluptatem sed debitis.\\\\nArchitecto sint et deleniti et quod possimus cupiditate.\\\\nTempore aut eum ipsum recusandae aliquid. Et sed dicta eveniet accusamus consequatur.\\\\nUllam voluptas consequatur aut eos ducimus.\\\\nId officia est ut dicta provident beatae ipsa. Eveniet sit ipsa officiis laborum.\\\\nIn vel est omnis sed impedit quod magni.\\\\nDignissimos quis illum qui atque aut ut quasi sequi. Maiores assumenda porro est ea necessitatibus qui qui dolorum.\\\\nVelit suscipit ut ipsam odit aut earum. Sunt dolor maxime nam assumenda non beatae magni molestias quia.\",\n    \"tagList\": [\n      \"ipsum\",\n      \"voluptatem\",\n      \"fugit\",\n      \"magnam\"\n    ],\n    \"createdAt\": \"2024-08-21T14:30:27.566Z\",\n    \"updatedAt\": \"2024-08-21T14:30:27.566Z\",\n    \"favorited\": false,\n    \"favoritesCount\": 149,\n    \"author\": {\n      \"username\": \"Eunice Abubakar\",\n      \"bio\": null,\n      \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n      \"following\": false\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "54bf29d5-1c43-4069-a7ec-1e14e278b83e",
+      "type": "http",
+      "documentation": "Get article comments by slug",
+      "method": "get",
+      "endpoint": "articles/exploratory-testing-aa0ab8d3-171c-4d32-af1d-252e12255aa3/comments",
+      "responses": [
+        {
+          "uuid": "f0e31fd9-f782-40ab-bfbd-d700a15ddba9",
+          "body": "{\n  \"comments\": [\n    {\n      \"id\": 2420,\n      \"createdAt\": \"2024-08-21T14:36:52.802Z\",\n      \"updatedAt\": \"2024-08-21T14:36:52.802Z\",\n      \"body\": \"Ut a voluptas labore et dolores magnam. Dolor deleniti dolores temporibus non autem. Voluptatibus numquam reiciendis nesciunt ipsa numquam enim. Unde velit optio quia.\",\n      \"author\": {\n        \"username\": \"Eunice Abubakar\",\n        \"bio\": null,\n        \"image\": \"https://api.realworld.io/images/demo-avatar.png\",\n        \"following\": false\n      }\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=26"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "cf-ray",
+              "value": "8c5a90d58977b339-MAN"
+            },
+            {
+              "key": "connection",
+              "value": "close"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 19 Sep 2024 15:21:29 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"12fc-xSpIjT4tL0Hx3BZ6ZGSQUrgkc+8\""
+            },
+            {
+              "key": "nel",
+              "value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1726759289&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=%2FXbdxfprCXmkxYXQ9upiyaUF6d8mYSFVwprmiBEQTng%3D\"}]}"
+            },
+            {
+              "key": "reporting-endpoints",
+              "value": "heroku-nel=https://nel.heroku.com/reports?ts=1726759289&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=%2FXbdxfprCXmkxYXQ9upiyaUF6d8mYSFVwprmiBEQTng%3D"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "via",
+              "value": "1.1 vegur"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-length",
+              "value": "4855"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "220be668-31f8-4e71-90eb-80192b314cac"
+    },
+    {
+      "type": "route",
+      "uuid": "cbd61fd1-a5a8-43de-9d24-7eafd0b89554"
+    },
+    {
+      "type": "route",
+      "uuid": "ca2c70e2-add0-4ef8-870c-7ec284ad74b5"
+    },
+    {
+      "type": "route",
+      "uuid": "1ec65691-e83e-4173-a922-014c69968b78"
+    },
+    {
+      "type": "route",
+      "uuid": "03e3afba-bd73-4243-b9ac-b4834346a192"
+    },
+    {
+      "type": "route",
+      "uuid": "ecc9fb9b-e657-482b-908e-5c63577008bc"
+    },
+    {
+      "type": "route",
+      "uuid": "cb155054-8278-4373-af6f-39fc990c5996"
+    },
+    {
+      "type": "route",
+      "uuid": "1862c54a-f8d3-4dc8-a19b-fa9ce2861cd6"
+    },
+    {
+      "type": "route",
+      "uuid": "1c7f7583-f237-4980-9b98-42e1a26074b1"
+    },
+    {
+      "type": "route",
+      "uuid": "0884b6d2-7348-42cb-9804-ff10f2e6267e"
+    },
+    {
+      "type": "route",
+      "uuid": "54bf29d5-1c43-4069-a7ec-1e14e278b83e"
+    }
+  ],
+  "proxyMode": true,
+  "proxyHost": "https://api.realworld.io/api",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

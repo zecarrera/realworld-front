@@ -111,6 +111,7 @@ export const CommentForm: React.FC<TCommentProps> = ({
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
 					className="border rounded-md border-gray-200"
+					data-testid="comment-form"
 				>
 					<FormField
 						control={form.control}

@@ -18,6 +18,7 @@ export const DeleteCommentButton: React.FC<TDeleteButtonProps> = ({
 			width={15}
 			onClick={() => deleteComment(slug, id)}
 			className="cursor-pointer text-gray-400"
+			data-testid="delete-comment"
 		/>
 	);
 };

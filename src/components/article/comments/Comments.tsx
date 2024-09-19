@@ -28,7 +28,7 @@ export const Comments: React.FC<TCommentsProps> = async ({ slug, token }) => {
 						key={comment.id}
 						className="my-5 mx-2 md:w-3/6 md:mx-auto border rounded-md"
 					>
-						<p className="p-5 border-b">{comment.body}</p>
+						<p className="p-5 border-b" data-testid="comment-body">{comment.body}</p>
 						<div className="flex justify-between items-center p-3 text-sm bg-gray-100">
 							<UserAvatar
 								username={comment.author.username}
