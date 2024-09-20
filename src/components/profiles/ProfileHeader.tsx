@@ -44,6 +44,7 @@ const ProfileHeader: React.FC<TProfileHeaderProps> = ({ profile, session }) => {
 						<Link
 							href="/settings"
 							className="flex items-center align-middle bg-transparent border border-gray-400 rounded-sm cursor-pointer text-gray-400 p-1 hover:bg-gray-200 ml-auto"
+							data-testid="profile-settings"
 						>
 							<Settings height={15} width={15} className="mr-1" />
 							Edit Profile Settings

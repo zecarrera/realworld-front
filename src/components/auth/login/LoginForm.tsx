@@ -75,7 +75,7 @@ export const LoginForm = () => {
 	return (
 		<>
 			{state.isError && (
-				<FormattedErrors data={state.errors} className="ml-5" />
+				<FormattedErrors data={state.errors} className="ml-5"/>
 			)}
 
 			<Form {...form}>
@@ -94,6 +94,7 @@ export const LoginForm = () => {
 										placeholder="Email"
 										{...field}
 										className="py-3 px-6 text-xl rounded-s-md text-gray-400 placeholder:text-gray-400  focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
+										data-testid="email-input"
 									/>
 								</FormControl>
 								<FormMessage />
@@ -112,6 +113,7 @@ export const LoginForm = () => {
 										placeholder="Password"
 										{...field}
 										className="py-3 px-6 text-xl rounded-s-md text-gray-400 placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-custom"
+										data-testid="password-input"
 									/>
 								</FormControl>
 								<FormMessage />
@@ -123,6 +125,7 @@ export const LoginForm = () => {
 							type="submit"
 							disabled={state.loading}
 							className="bg-green-custom opacity-65 py-3 px-5 rounded-md  text-xl hover:bg-green-custom hover:opacity-100"
+							data-testid="signin-btn"
 						>
 							Sign in
 						</Button>

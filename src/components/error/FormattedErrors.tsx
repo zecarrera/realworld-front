@@ -16,7 +16,7 @@ export const FormattedErrors: React.FC<TFormattedErrors> = ({
 		<ul className={cn("list-disc text-left text-rose-700", className)}>
 			{keys.map((ele) =>
 				data[ele].map((error, index) => (
-					<li key={index}>{ele + " " + error}</li>
+					<li key={index} data-testid='error-msg'>{ele + " " + error}</li>
 				))
 			)}
 		</ul>

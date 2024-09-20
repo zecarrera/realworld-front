@@ -31,7 +31,7 @@ const UserAvatar: React.FC<TUserAvatar> = ({
 					className
 				)}
 			>
-				<Link href={`/profile/${username}`}>{username}</Link>
+				<Link href={`/profile/${username}`} data-testid="profile-username">{username}</Link>
 				<p className="opacity-65 font-light">{date}</p>
 			</div>
 		</div>
