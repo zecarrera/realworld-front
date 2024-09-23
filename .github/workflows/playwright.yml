@@ -8,9 +8,6 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./realworld-front
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,7 +30,6 @@ jobs:
           echo "NEXT_PUBLIC_RELATIVE_PATH=http://localhost:3000/api" >> .env
       - name: Start App
         run: npm run dev
-
 
   start-mockoon:
     runs-on: ubuntu-latest
