@@ -35,7 +35,7 @@ jobs:
       - name: Start Mockoon
         run: |
           npm install -g @mockoon/cli
-          mockoon-cli start --data /mockoon/RealWorldApi.json --port 9001 &
+          mockoon-cli start --data ./mockoon/RealWorldApi.json --port 9001 &
       - name: Run Playwright tests
         run: npx playwright test
       - name: Upload Playwright report
