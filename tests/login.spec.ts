@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 const URL = "http://localhost:3000/";
 
 
-test.describe.only('Given conduit login page is loaded', ()=> {
+test.describe('Given conduit login page is loaded', ()=> {
   test.beforeEach(async ({ page }) =>{
     await page.goto(`${URL}login`);
   })
