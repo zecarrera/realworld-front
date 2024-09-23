@@ -29,8 +29,9 @@ jobs:
           echo "BASE_URL=http://localhost:9001" >> .env
           echo "NEXT_PUBLIC_RELATIVE_PATH=http://localhost:3000/api" >> .env
       - name: Start App
-        run: |
-          npm run dev
+        run: npm run dev
+        working-directory: ./realworld-front
+
 
   start-mockoon:
     runs-on: ubuntu-latest
@@ -40,6 +41,7 @@ jobs:
         run: |
           npm install -g @mockoon/cli
           mockoon-cli start --data ./mockoon/RealWorldApi.json --port 9001
+        working-directory: ./realworld-front
 
   test:
     runs-on: ubuntu-latest
