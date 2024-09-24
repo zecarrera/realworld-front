@@ -1,3 +1,23 @@
+# Mocking playwright API calls made easy with mockoon
+This repo exemplifies the usage of [mockoon](https://mockoon.com/) as an easy and quick approach to mock the API calls that are made whilst testing the UI.
+
+### Playwright UI tests
+
+Under the `tests` directory you'll find the UI tests that have been implemented.
+
+#### Running tests from the terminal:
+
+1. Start application (`npm install && npm run dev`)
+2. Start mockoon (through its UI or using `mockoon-cli start --data ./mockoon/RealWorldApi.json --port 9001`)
+3. Run `npx playwright test`
+   1. add `--ui` if you wish to run on headed mode.
+
+#### GitHub Actions
+
+Tests are configured to be automatically triggered once a PR is raised or code is pushed to the `main` branch.
+
+The application code is a fork from  [RealWorld example app](salahadin-dinsafa/realworld-front) and its initial README is replicated below.
+
 
 # [Next.js 14]
 
@@ -21,8 +41,8 @@ To get the frontend running locally:
 
   - COOKIE_NAME=%name of cookie%
   - COOKIE_PASSWORD=%password you want for cookie%
-  - ++note COOKIE_PASSWORD length must be at least 32 character as it is described here 
-https://www.npmjs.com/package/iron-session
+  - ++note COOKIE_PASSWORD length must be at least 32 character as it is described here https://www.npmjs.com/package/iron-session 
+Password generated using -> https://1password.com/password-generator
  - you can change base url in respect of your backend application
   - BASE_URL=https://api.realworld.io/api
 
